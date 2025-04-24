@@ -36,13 +36,15 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white">
       <Navbar />
-      <Hero />
-      <UseCases />
-      <AdditionalCapabilities />
-      <TrustedBy />
-      <HowWeWork />
-      <Cta />
-      <Footer />
+      <div className="pt-24">
+        <Hero />
+        <UseCases />
+        <AdditionalCapabilities />
+        <TrustedBy />
+        <HowWeWork />
+        <Cta />
+        <Footer />
+      </div>
     </div>
   );
 }
