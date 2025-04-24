@@ -7,6 +7,7 @@ const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [loadingStatus, setLoadingStatus] = useState<string>('');
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     if (!containerRef.current || !canvasRef.current) return;
@@ -82,9 +83,13 @@ const Hero: React.FC = () => {
           // Model loaded successfully
           modelLoaded = true;
           setLoadingStatus('Model loaded successfully!');
+          // Hide loading status after successful load
+          setTimeout(() => {
+            setIsLoaded(true);
+          }, 1000); // Short delay to show the success message
           
           // Scale the model to appropriate size - increased scale to make the ball bigger
-          gltf.scene.scale.set(7, 7, 7);
+          gltf.scene.scale.set(7, 7, 7)
           
           // Improve material quality
           gltf.scene.traverse((child: any) => {
@@ -168,6 +173,13 @@ const Hero: React.FC = () => {
           // Loading progress
           const progressPercent = Math.round(xhr.loaded / xhr.total * 100);
           setLoadingStatus(`Loading: ${progressPercent}%`);
+          
+          // Hide loading status when it reaches 100%
+          if (progressPercent === 100) {
+            setTimeout(() => {
+              setIsLoaded(true);
+            }, 1000); // Short delay to show the 100% message
+          }
         },
         (error: any) => {
           // Error handling
@@ -237,15 +249,15 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative overflow-hidden min-h-screen flex items-center justify-center">
+    <section className="relative overflow-hidden min-h-[calc(100vh-4rem)] flex items-center justify-center">
       {/* Three.js container */}
       <div 
         ref={containerRef} 
         className="absolute top-0 left-0 w-full h-full z-0"
       >
         <canvas ref={canvasRef} className="w-full h-full" />
-        {/* Debug info */}
-        {loadingStatus && (
+        {/* Debug info - only show if not fully loaded */}
+        {loadingStatus && !isLoaded && (
           <div className="absolute top-4 left-4 bg-black/70 text-white p-2 rounded">
             {loadingStatus}
           </div>
@@ -256,19 +268,19 @@ const Hero: React.FC = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-gray-950/80 via-gray-900/60 to-gray-950/90 z-10"></div>
       
       {/* Content */}
-      <div className="container-custom relative z-20 pt-20 pb-24 text-center">
+      <div className="container-custom relative z-20 pt-0 pb-16 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500">
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-3 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500">
             Turn interactions into income
           </h1>
           
-          <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-gray-200">
+          <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-gray-200">
             Engage clients. Expand revenue.
           </h2>
           
-          <p className="text-xl md:text-2xl mb-10 max-w-2xl mx-auto text-gray-300">
+          <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-gray-300">
             Ditch the siloed, SaaS tools.
-            <span className="block mt-2">The AI-native platform to power inbound-led growth for your professional services.</span>
+            <span className="block mt-1">The AI-native platform to power inbound-led growth for your professional services.</span>
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
