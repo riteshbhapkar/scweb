@@ -6,8 +6,10 @@ import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/l
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const shapesContainerRef = useRef<HTMLDivElement>(null); // New ref for shapes container
   const [loadingStatus, setLoadingStatus] = useState<string>('');
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const shapesRef = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
     if (!containerRef.current || !canvasRef.current) return;
@@ -49,10 +51,6 @@ const Hero: React.FC = () => {
     const discoBallGroup = new THREE.Group();
     scene.add(discoBallGroup);
     
-    // Comment out or remove these two lines to hide the axes helper
-    // const axesHelper = new THREE.AxesHelper(5);
-    // scene.add(axesHelper);
-    
     // Load the GLTF model
     const loader = new GLTFLoader();
     setLoadingStatus('Loading model...');
@@ -89,7 +87,7 @@ const Hero: React.FC = () => {
           }, 1000); // Short delay to show the success message
           
           // Scale the model to appropriate size - increased scale to make the ball bigger
-          gltf.scene.scale.set(7, 7, 7)
+          gltf.scene.scale.set(0.5, 0.5, 0.5)
           
           // Improve material quality
           gltf.scene.traverse((child: any) => {
@@ -241,19 +239,207 @@ const Hero: React.FC = () => {
     
     animate();
     
+    // Create floating shapes
+    const createFloatingShapes = () => {
+      // Find the shapes container - it's the first div in our section
+      const shapesContainer = document.querySelector('section > div:first-child');
+      if (!shapesContainer) return;
+      
+      // Clear any existing shapes
+      shapesRef.current.forEach(shape => {
+        if (shapesContainer && shapesContainer.contains(shape)) {
+          shapesContainer.removeChild(shape);
+        }
+      });
+      shapesRef.current = [];
+      
+      // Shape types matching test.html exactly
+      const shapeTypes = ['rounded-square', 'circle', 'parallelogram', 'plus', 'hexagon', 'rhombus', 'pentagon'];
+      const colorTypes = ['mint', 'cyan', 'purple', 'pink', 'blue', 'amber'];
+      const sizeTypes = ['small', 'medium', 'large'];
+      
+      // Create shapes - use 15 shapes as in test.html
+      const shapeCount = 15;
+      const containerRect = shapesContainer.getBoundingClientRect();
+      
+      // Divide the screen into a grid for more even distribution
+      const gridCols = 5;
+      const gridRows = 3;
+      const cellWidth = containerRect.width / gridCols;
+      const cellHeight = containerRect.height / gridRows;
+      
+      // Track which cells already have shapes to avoid clustering
+      const occupiedCells = new Set();
+      
+      for (let i = 0; i < shapeCount; i++) {
+        const shape = document.createElement('div');
+        shape.classList.add('floating-shape');
+        
+        // Add size class - distribute evenly
+        const sizeClass = sizeTypes[Math.floor(Math.random() * sizeTypes.length)];
+        shape.classList.add(sizeClass);
+        
+        // Add shape class - distribute with preference for rounded-square and circle
+        let shapeClass;
+        if (i < 6) {
+          // First 6 shapes are more likely to be basic shapes
+          shapeClass = Math.random() < 0.7 ? 
+            (Math.random() < 0.5 ? 'rounded-square' : 'circle') : 
+            shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
+        } else {
+          shapeClass = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
+        }
+        shape.classList.add(shapeClass);
+        
+        // Add color class
+        const colorClass = colorTypes[Math.floor(Math.random() * colorTypes.length)];
+        shape.classList.add(colorClass);
+        
+        // Find an unoccupied cell for more even distribution
+        let cellX, cellY, cellKey;
+        let attempts = 0;
+        
+        do {
+          cellX = Math.floor(Math.random() * gridCols);
+          cellY = Math.floor(Math.random() * gridRows);
+          cellKey = `${cellX},${cellY}`;
+          attempts++;
+          
+          // If we've tried too many times, just place it anywhere
+          if (attempts > 20) break;
+        } while (occupiedCells.has(cellKey));
+        
+        // Mark this cell as occupied
+        occupiedCells.add(cellKey);
+        
+        // Get shape size based on class
+        let shapeSize = 70; // Default medium size
+        if (sizeClass === 'small') shapeSize = 40;
+        if (sizeClass === 'large') shapeSize = 130;
+        
+        // Position within the cell, with some randomness
+        const x = cellX * cellWidth + Math.random() * (cellWidth - shapeSize);
+        const y = cellY * cellHeight + Math.random() * (cellHeight - shapeSize);
+        
+        shape.style.left = `${x}px`;
+        shape.style.top = `${y}px`;
+        
+        // Random rotation
+        const rotation = Math.floor(Math.random() * 360);
+        shape.style.transform = `rotate(${rotation}deg)`;
+        
+        // Add to container
+        shapesContainer.appendChild(shape);
+        shapesRef.current.push(shape);
+        
+        // Animate the shape
+        animateShape(shape);
+      }
+    };
+    
+    // Animate a shape with GSAP-like behavior
+    const animateShape = (shape: HTMLDivElement) => {
+      // Initial position
+      const startX = parseFloat(shape.style.left);
+      const startY = parseFloat(shape.style.top);
+      
+      // Random movement range - larger range for more noticeable movement
+      const floatX = Math.random() * 200 + 150; // 150-350px (increased from 100-250px)
+      const floatY = Math.random() * 200 + 150; // 150-350px (increased from 100-250px)
+      
+      // Animation duration - slightly faster for more visible movement
+      // Remove rotation animation
+      // const floatRotation = Math.random() * 180 + 90; // 90-270 degrees
+      
+      // Animation duration - longer for smoother movement
+      const duration = Math.random() * 15 + 20; // 20-35 seconds
+      
+      // Direction
+      const directionX = Math.random() > 0.5 ? 1 : -1;
+      const directionY = Math.random() > 0.5 ? 1 : -1;
+      
+      // Animation function
+      let startTime: number | null = null;
+      let animationFrameId: number;
+      
+      const animate = (timestamp: number) => {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = elapsed / (duration * 1000);
+        
+        // Sine wave movement for smooth back-and-forth
+        const sineWave = Math.sin(progress * Math.PI * 2);
+        
+        // Calculate new position
+        const newX = startX + directionX * floatX * sineWave;
+        const newY = startY + directionY * floatY * sineWave;
+        
+        // Get the initial rotation - we'll keep this fixed
+        const initialRotation = parseFloat(shape.style.transform.replace('rotate(', '').replace('deg)', '')) || 0;
+        
+        // Apply new position but keep the initial rotation
+        shape.style.left = `${newX}px`;
+        shape.style.top = `${newY}px`;
+        shape.style.transform = `rotate(${initialRotation}deg)`;
+        
+        // Continue animation - check if shape is in the shapes container instead of containerRef
+        const shapesContainer = document.querySelector('section > div:first-child');
+        if (shapesContainer && shapesContainer.contains(shape)) {
+          animationFrameId = requestAnimationFrame(animate);
+        }
+      };
+      
+      animationFrameId = requestAnimationFrame(animate);
+      
+      // Store animation ID for cleanup
+      shape.dataset.animationId = animationFrameId.toString();
+    };
+    
+    // Create floating shapes after a short delay
+    setTimeout(createFloatingShapes, 500);
+    
+    // Handle window resize for shapes
+    const handleResize = () => {
+      updateSize();
+      // Recreate shapes on resize
+      createFloatingShapes();
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
     return () => {
       window.removeEventListener('resize', updateSize);
+      window.removeEventListener('resize', handleResize);
+      
       // Clean up Three.js resources
       renderer.dispose();
+      
+      // Clean up floating shapes
+      shapesRef.current.forEach(shape => {
+        const shapesContainer = document.querySelector('section > div:first-child');
+        if (shapesContainer && shapesContainer.contains(shape)) {
+          shapesContainer.removeChild(shape);
+          
+          // Cancel animation
+          if (shape.dataset.animationId) {
+            cancelAnimationFrame(parseInt(shape.dataset.animationId));
+          }
+        }
+      });
     };
   }, []);
 
   return (
-    <section className="relative overflow-hidden min-h-[calc(100vh-4rem)] flex items-center justify-center">
+    <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center justify-center">
+      {/* Floating shapes container - positioned behind everything */}
+      <div className="absolute top-0 left-0 w-full h-full z-0">
+        {/* Shapes will be added here by JavaScript */}
+      </div>
+      
       {/* Three.js container */}
       <div 
         ref={containerRef} 
-        className="absolute top-0 left-0 w-full h-full z-0"
+        className="absolute top-0 left-0 w-full h-full z-5"
       >
         <canvas ref={canvasRef} className="w-full h-full" />
         {/* Debug info - only show if not fully loaded */}
@@ -264,11 +450,11 @@ const Hero: React.FC = () => {
         )}
       </div>
       
-      {/* Overlay gradient */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-gray-950/80 via-gray-900/60 to-gray-950/90 z-10"></div>
+      {/* Overlay gradient - reduce opacity slightly to make shapes more visible */}
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-gray-950/70 via-gray-900/50 to-gray-950/80 z-10"></div>
       
       {/* Content */}
-      <div className="container-custom relative z-20 pt-0 pb-16 text-center">
+      <div className="container-custom relative z-30 pt-0 pb-16 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-3 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500">
             Turn interactions into income
@@ -299,6 +485,184 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </div>
+      {/* CSS for floating shapes - exactly matching test.html */}
+      <style>{`
+        .floating-shape {
+          position: absolute;
+          background: rgba(255, 255, 255, 0.1); /* Slightly brighter background */
+          z-index: 1; /* Lower z-index to be behind everything */
+          opacity: 0.9; /* Increased opacity for better visibility */
+          pointer-events: none;
+          transform-origin: center;
+          border: 1px solid rgba(255, 255, 255, 0.35); /* Brighter border */
+          transition: transform 0.3s ease-in-out;
+          backdrop-filter: blur(5px);
+          -webkit-backdrop-filter: blur(5px);
+          box-shadow: 0 0 30px rgba(150, 150, 255, 0.4); /* Brighter glow */
+          will-change: transform;
+          transform: translate3d(0, 0, 0);
+          animation: pulse-glow 5s infinite ease-in-out;
+          border-radius: 12px;
+        }
+        
+        /* Size variants */
+        .floating-shape.small {
+          width: 40px;
+          height: 40px;
+        }
+        
+        .floating-shape.medium {
+          width: 70px;
+          height: 70px;
+        }
+        
+        .floating-shape.large {
+          width: 130px;
+          height: 130px;
+        }
+        
+        /* Rounded square */
+        .floating-shape.rounded-square {
+          border-radius: 16px;
+        }
+        
+        /* Circle */
+        .floating-shape.circle {
+          border-radius: 50%;
+        }
+        
+        /* Parallelogram */
+        .floating-shape.parallelogram {
+          clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+          border-radius: 8px;
+        }
+        
+        /* Plus sign */
+        .floating-shape.plus {
+          clip-path: polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%);
+          border-radius: 8px;
+        }
+        
+        /* Hexagon */
+        .floating-shape.hexagon {
+          clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+          border-radius: 8px;
+        }
+        
+        /* Rhombus */
+        .floating-shape.rhombus {
+          clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+          border-radius: 8px;
+        }
+        
+        /* Pentagon */
+        .floating-shape.pentagon {
+          clip-path: polygon(50% 0%, 100% 40%, 80% 100%, 20% 100%, 0% 40%);
+          border-radius: 8px;
+        }
+        
+        /* Enhanced neon lighting effect */
+        .floating-shape::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: inherit;
+          clip-path: inherit;
+          opacity: 0.95; /* Increase opacity for better visibility */
+          box-shadow: 0 0 15px rgba(220, 220, 255, 0.6) inset; /* Stronger inner glow */
+        }
+        
+        /* Added stronger neon border glow effect */
+        .floating-shape::before {
+          content: '';
+          position: absolute;
+          inset: -2px;
+          border-radius: inherit;
+          clip-path: inherit;
+          opacity: 0.95; /* Increase opacity for better visibility */
+          z-index: -1;
+          filter: blur(5px);
+        }
+        
+        /* Soft mint - make colors more vibrant */
+        .floating-shape.mint::after {
+          background: linear-gradient(135deg, 
+              rgba(19, 206, 102, 0.4) 0%, 
+              rgba(19, 206, 102, 0.6) 100%);
+        }
+        .floating-shape.mint::before {
+          background: rgba(19, 206, 102, 0.7);
+          box-shadow: 0 0 25px rgba(19, 206, 102, 1);
+        }
+        
+        /* Soft cyan - make colors more vibrant */
+        .floating-shape.cyan::after {
+          background: linear-gradient(135deg, 
+              rgba(6, 182, 212, 0.4) 0%, 
+              rgba(6, 182, 212, 0.6) 100%);
+        }
+        .floating-shape.cyan::before {
+          background: rgba(6, 182, 212, 0.7);
+          box-shadow: 0 0 25px rgba(6, 182, 212, 1);
+        }
+        
+        /* Soft purple */
+        .floating-shape.purple::after {
+          background: linear-gradient(135deg, 
+              rgba(147, 51, 234, 0.25) 0%, 
+              rgba(147, 51, 234, 0.45) 100%);
+        }
+        .floating-shape.purple::before {
+          background: rgba(147, 51, 234, 0.7);
+          box-shadow: 0 0 25px rgba(147, 51, 234, 1);
+        }
+        
+        /* Soft pink */
+        .floating-shape.pink::after {
+          background: linear-gradient(135deg, 
+              rgba(236, 72, 153, 0.25) 0%, 
+              rgba(236, 72, 153, 0.45) 100%);
+        }
+        .floating-shape.pink::before {
+          background: rgba(236, 72, 153, 0.7);
+          box-shadow: 0 0 25px rgba(236, 72, 153, 1);
+        }
+        
+        /* Soft blue */
+        .floating-shape.blue::after {
+          background: linear-gradient(135deg, 
+              rgba(59, 130, 246, 0.25) 0%, 
+              rgba(59, 130, 246, 0.45) 100%);
+        }
+        .floating-shape.blue::before {
+          background: rgba(59, 130, 246, 0.7);
+          box-shadow: 0 0 25px rgba(59, 130, 246, 1);
+        }
+        
+        /* Soft amber */
+        .floating-shape.amber::after {
+          background: linear-gradient(135deg, 
+              rgba(245, 158, 11, 0.25) 0%, 
+              rgba(245, 158, 11, 0.45) 100%);
+        }
+        .floating-shape.amber::before {
+          background: rgba(245, 158, 11, 0.7);
+          box-shadow: 0 0 25px rgba(245, 158, 11, 1);
+        }
+        
+        /* Pulsing glow animation */
+        @keyframes pulse-glow {
+          0% {
+            box-shadow: 0 0 15px rgba(150, 150, 255, 0.3);
+          }
+          50% {
+            box-shadow: 0 0 30px rgba(180, 180, 255, 0.5);
+          }
+          100% {
+            box-shadow: 0 0 15px rgba(150, 150, 255, 0.3);
+          }
+        }
+      `}</style>
     </section>
   );
 };

@@ -81,7 +81,7 @@ const Navbar = () => {
           animate={hidden ? "short" : "long"}
         >
           <span className="font-bold text-xl bg-gradient-to-r from-purple-400 to-indigo-500 text-transparent bg-clip-text whitespace-nowrap">
-            SwanCity.AI
+            {/* SwanCity.AI */}
           </span>
         </motion.div>
       </motion.div>
