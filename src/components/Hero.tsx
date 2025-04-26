@@ -57,11 +57,10 @@ const Hero: React.FC = () => {
     
     // Try different paths if the model isn't loading
     const modelPaths = [
-      '/disco_ball/scene.gltf',
-      './disco_ball/scene.gltf',
+      '/disco_ball/scene.gltf',  // This should be the correct path for Vercel
       'disco_ball/scene.gltf',
-      '/public/disco_ball/scene.gltf',
-      '../public/disco_ball/scene.gltf'
+      './disco_ball/scene.gltf',
+      '../disco_ball/scene.gltf'
     ];
     
     let modelLoaded = false;
