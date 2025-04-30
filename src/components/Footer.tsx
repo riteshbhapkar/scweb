@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
               <Bot className="w-8 h-8 text-indigo-500" />
-              <span className="text-xl font-bold text-white">AgentOS</span>
+              <span className="text-xl font-bold text-white">Rivera</span>
             </div>
             <p className="mb-4">
               The AI-native platform to power inbound-led growth for your professional services.
@@ -84,7 +84,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <Mail className="w-5 h-5 mr-2 mt-0.5 text-indigo-400" />
-                <span>contact@agentos.ai</span>
+                <span>contact@rivera.ai</span>
               </li>
               <li>
                 <a 
@@ -99,7 +99,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p>&copy; 2025 AgentOS. All rights reserved.</p>
+          <p>&copy; 2025 Rivera. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-sm text-gray-400 hover:text-indigo-400 transition-colors">
               Privacy Policy

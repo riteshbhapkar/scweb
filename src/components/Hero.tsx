@@ -652,12 +652,12 @@ const Hero: React.FC = () => {
           </h1>
           
           <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-gray-200">
-            Engage clients. Expand revenue.
+          Unify. Amplify. Grow.
           </h2>
           
           <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-gray-300">
-            Ditch the siloed, SaaS tools.
-            <span className="block mt-1">The AI-native platform to power inbound-led growth for your professional services.</span>
+            AI-powered growth for pros—ditch the SaaS sprawl.
+            {/* <span className="block mt-1">The AI-native platform to power inbound-led growth for your professional services.</span> */}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

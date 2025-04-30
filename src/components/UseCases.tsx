@@ -11,31 +11,31 @@ const UseCases: React.FC = () => {
   const voiceUseCases = [
     {
       title: 'Live Call CoPilot',
-      description: 'Real-time AI assistant with live transcription, speaker ID, and suggested responses for complex client interactions. No bots in your meetings — keep it authentic.',
+      description: 'Your silent partner in every client conversation. Real-time guidance when it matters most. No awkward bot will join your meeting.',
       metrics: [
         { label: 'Higher Close Rates', value: '40%', description: 'Convert challenging consultations into wins.' },
-        { label: 'Information Retention', value: '95%+', description: 'Eliminate post-call gaps.' },
-        { label: 'Less Prep Time', value: '60%', description: 'Deliver confident, expert-backed responses instantly.' }
+        { label: 'Time Saved', value: '8 hours', description: 'Saved per week in pre-call preparation' },
+        { label: 'Knowledge Retention', value: 'Zero', description: 'Knowledge loss between conversations' }
       ],
       icon: Mic
     },
     {
       title: 'Call Analytics Agent',
-      description: 'Unlock deep insights from calls using audio intelligence.',
+      description: 'Hear what clients are really saying. Amplify and Act on insights others miss.',
       metrics: [
-        { label: 'Cost Reduction', value: '80%', description: 'Lower operational expenses' },
-        { label: 'Lower Risk', value: '6X', description: 'Reduce compliance issues' },
-        { label: 'More Feedback', value: '4X', description: 'Increase training effectiveness' }
+        { label: 'Cost Reduction', value: '80%', description: 'Reduction in conversation analysis costs' },
+        { label: 'Revenue Opportunities', value: '6', description: 'New revenue opportunities per 50 client calls' },
+        { label: 'Forecasting', value: 'Precise', description: 'Revenue forecasting from conversation insights' }
       ],
       icon: Phone
     },
     {
       title: 'Voice Agent',
-      description: 'Handle inbound calls using human-like AI voice agents.',
+      description: 'Handle inbound calls with remarkably human-like voice agents that represent your brand perfectly, 24/7.',
       metrics: [
-        { label: 'Lead Management', value: '24/7', description: 'Lead qualification + data enrichment + follow-ups' },
-        { label: 'Availability', value: '100%', description: 'Never miss a potential client again' },
-        { label: 'Time Savings', value: 'Significant', description: 'Free up resources for high-value tasks' }
+        { label: 'Lead Capture', value: '24/7', description: 'Response capability capturing 3X more qualified leads' },
+        { label: 'Sales Cycle', value: '4-hour', description: 'Acceleration in sales cycle from initial contact' },
+        { label: 'Lead Quality', value: 'Precise', description: 'Pre-qualification leading to direct increase in lead quality' }
       ],
       icon: Phone
     }
@@ -45,31 +45,31 @@ const UseCases: React.FC = () => {
   const chatUseCases = [
     {
       title: 'Conversational Growth Agent',
-      description: 'WhatsApp-based AI that personalizes messaging and guides users through conversion funnels.',
+      description: 'Turn your client data into personalized conversations that feel natural, guide users through your conversion funnel, and create memorable brand experiences across platforms.',
       metrics: [
-        { label: 'Engagement Boost', value: '45%+', description: 'From typical 12% to over 45%' },
-        { label: 'Higher Conversion', value: '3X', description: 'Triple your conversion rates' },
-        { label: 'Shorter Sales Cycles', value: '50%', description: 'Cut your sales timeline in half' }
+        { label: 'Engagement Rates', value: '3x', description: 'Boost engagement rates by upto 3x with context-aware messaging' },
+        { label: 'Acquisition Cost', value: '40%', description: 'Reduce Client acquisition cost by 40%' },
+        { label: 'Revenue Opportunities', value: 'Active', description: 'Turn passive audience at every touchpoint into active revenue opportunities' }
       ],
       icon: MessageSquare
     },
     {
-      title: 'Lead Qualification',
-      description: '24/7 AI virtual receptionists that screen and manage leads.',
+      title: 'Lead qualification',
+      description: '24/7 Virtual Receptionists and Intake Specialists that handle initial client screening, management, and follow-ups with remarkable attention to detail.',
       metrics: [
-        { label: 'Intake Time', value: '5 mins', description: 'Cut intake time from 30 mins to 5 mins' },
-        { label: 'Revenue per Lead', value: '$500', description: 'Earn up to $500 per qualified lead transferred' },
-        { label: 'Response Time', value: 'Instant', description: 'Never keep potential clients waiting' }
+        { label: 'Intake Time', value: '5 mins', description: 'Reduce intake time from 30 mins to 5 mins with AI-powered client screening' },
+        { label: 'Revenue per Lead', value: '$500', description: 'Earn up-to $500 for every qualified lead transferred through our network' },
+        { label: 'Rejected Leads', value: 'Revenue', description: 'Transform rejected leads into a new revenue stream with automated payments and transparent tracking' }
       ],
       icon: MessageSquare
     },
     {
-      title: 'Customer Success Agent',
-      description: 'Intelligent platform that reduces churn and manages customer growth proactively.',
+      title: 'Customer Success',
+      description: '24/7 intelligent customer success platform that proactively manages customer lifecycle, identifies expansion opportunities, and prevents churn before it happens.',
       metrics: [
-        { label: 'Resolution Rate', value: '95%', description: 'First-time resolution success' },
-        { label: 'Workload Reduction', value: '50%', description: 'For success managers' },
-        { label: 'Retention Improvement', value: 'Significant', description: 'Keep clients longer, grow relationships' }
+        { label: 'Resolution Rate', value: '95%', description: 'First-contact resolution for support inquiries' },
+        { label: 'Client Lifetime Value', value: '30%', description: 'Average client lifetime value increased by 30%' },
+        { label: 'Service Expansions', value: '4x', description: 'Up to 4x increase in service expansions from existing clients' }
       ],
       icon: MessageSquare
     }
@@ -109,7 +109,7 @@ const UseCases: React.FC = () => {
             What Magic Looks Like
           </h2>
           <p className="max-w-3xl mx-auto text-lg text-gray-300">
-            Harness the power of Agent OS across multiple channels — like having an army of intelligent agents at your fingertips, working 24/7 to grow your business.
+            Harness the power of Rivera across multiple channels — The intelligence platform for predictable growth, working 24/7 to grow your business.
           </p>
         </div>
 
