@@ -663,7 +663,8 @@ const Hero: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
               onClick={() => setShowModal(true)}
-              className="btn-primary bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600"
+              className="btn-primary bg-gradient-to-r from-indigo-500 via-pink-500 hover:from-indigo-600 hover:via-purple-600"
+              // className='btn-primary'
             >
               Book Your Demo
             </button>
