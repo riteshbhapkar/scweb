@@ -26,7 +26,7 @@ const CapabilityTile: React.FC<{
 
 const AdditionalCapabilities: React.FC = () => {
   return (
-    <section id="capabilities" className="section-padding bg-gray-950/80">
+    <section id="capabilities" className="section-padding bg-gray-950/80" style={{ marginTop: -100 }}>
       <div className="container-custom">
         <div className="text-center mb-16 fade-in">
           <h2 className="mb-4 bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-indigo-500">

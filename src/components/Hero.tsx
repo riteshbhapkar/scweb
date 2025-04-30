@@ -79,7 +79,7 @@ const Hero: React.FC = () => {
         (gltf: { scene: { scale: { set: (arg0: number, arg1: number, arg2: number) => void; }; traverse: (arg0: (child: any) => void) => void; }; animations: string | any[]; }) => {
           // Model loaded successfully
           modelLoaded = true;
-          setLoadingStatus('Model loaded successfully!');
+          // setLoadingStatus('Model loaded successfully!');
           // Hide loading status after successful load
           setTimeout(() => {
             setIsLoaded(true);
