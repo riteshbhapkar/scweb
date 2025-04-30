@@ -1,7 +1,80 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Calendar, ArrowRight } from 'lucide-react';
 
 const Cta: React.FC = () => {
+  // Add state for form data
+  const [formData, setFormData] = useState({
+    name: '',
+    company: '',
+    email: '',
+    phone: ''
+  });
+  // Add loading state for form submission
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  // Add success message state
+  const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
+  // Add error message state
+  const [submitError, setSubmitError] = useState<string>('');
+
+  // Handle form input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError('');
+    
+    try {
+      // Google Apps Script URL that will handle the form submission
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbwRHKPNxsqSszKAe-3eiyZKgSUcOJ4Cy9vPjZ45YETBxbY-MqQ42ezYpjagdB_H-uQr/exec';
+      
+      // Create form data to send
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('organization', formData.company);
+      formDataToSend.append('phone', formData.phone || '');
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('timestamp', new Date().toISOString());
+      formDataToSend.append('sheetUrl', 'https://docs.google.com/spreadsheets/d/1S6XqHAwBj6NvZzkm9gSaWsY6qzPZf5Q_yHB9wXvA3_8/edit?usp=sharing');
+      
+      // Send the data
+      const response = await fetch(scriptURL, {
+        method: 'POST',
+        body: formDataToSend
+      });
+      
+      if (response.ok) {
+        // Show success message
+        setSubmitSuccess(true);
+        // Reset form
+        setFormData({
+          name: '',
+          company: '',
+          email: '',
+          phone: ''
+        });
+        // Hide success message after 3 seconds
+        setTimeout(() => {
+          setSubmitSuccess(false);
+        }, 3000);
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitError('There was an error submitting your information. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="book-call" className="section-padding bg-gradient-to-r from-indigo-900/50 to-purple-900/50">
       <div className="container-custom">
@@ -37,13 +110,7 @@ const Cta: React.FC = () => {
                 </li>
               </ul>
               
-              <a 
-                href="#" 
-                className="inline-flex items-center gap-2 px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 border border-transparent rounded-md shadow-lg hover:shadow-indigo-500/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300"
-              >
-                <Calendar className="w-5 h-5" />
-                Book Your Demo
-              </a>
+              {/* Book Demo button removed as requested */}
             </div>
             
             <div className="bg-gray-800/50 p-6 rounded-xl border border-gray-700 animate-float">
@@ -51,10 +118,10 @@ const Cta: React.FC = () => {
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-600 text-white mb-3">
                   <Calendar className="w-6 h-6" />
                 </div>
-                <h3 className="text-xl font-bold">Schedule Your Demo</h3>
+                <h3 className="text-xl font-bold">Request Your Demo</h3>
               </div>
               
-              <form className="space-y-4">
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
                     Full Name
@@ -62,8 +129,12 @@ const Cta: React.FC = () => {
                   <input
                     type="text"
                     id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-white"
                     placeholder="John Smith"
+                    required
                   />
                 </div>
                 
@@ -74,8 +145,12 @@ const Cta: React.FC = () => {
                   <input
                     type="email"
                     id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-white"
                     placeholder="john@company.com"
+                    required
                   />
                 </div>
                 
@@ -86,17 +161,49 @@ const Cta: React.FC = () => {
                   <input
                     type="text"
                     id="company"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
                     className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-white"
                     placeholder="Company Name"
+                    required
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-white"
+                    placeholder="(123) 456-7890"
                   />
                 </div>
                 
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300"
+                  disabled={isSubmitting}
+                  className="w-full inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 disabled:opacity-70"
                 >
-                  Request Demo
+                  {isSubmitting ? 'Submitting...' : 'Request Demo'}
                 </button>
+                
+                {submitSuccess && (
+                  <div className="mt-3 text-center text-green-400">
+                    Thank you! Your demo request has been submitted successfully.
+                  </div>
+                )}
+                
+                {submitError && (
+                  <div className="mt-3 text-center text-red-400">
+                    {submitError}
+                  </div>
+                )}
               </form>
             </div>
           </div>

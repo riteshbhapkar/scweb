@@ -10,6 +10,81 @@ const Hero: React.FC = () => {
   const [loadingStatus, setLoadingStatus] = useState<string>('');
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const shapesRef = useRef<HTMLDivElement[]>([]);
+  // Add state for modal visibility
+  const [showModal, setShowModal] = useState<boolean>(false);
+  // Add form data state
+  const [formData, setFormData] = useState({
+    name: '',
+    organization: '',
+    phone: '',
+    email: ''
+  });
+  // Add loading state for form submission
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  // Add success message state
+  const [submitSuccess, setSubmitSuccess] = useState<boolean>(false);
+  // Add error message state
+  const [submitError, setSubmitError] = useState<string>('');
+
+  // Handle form input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitError('');
+    
+    try {
+      // Google Apps Script URL that will handle the form submission
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbwRHKPNxsqSszKAe-3eiyZKgSUcOJ4Cy9vPjZ45YETBxbY-MqQ42ezYpjagdB_H-uQr/exec';
+      
+      // Create form data to send
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('organization', formData.organization);
+      formDataToSend.append('phone', formData.phone);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('timestamp', new Date().toISOString());
+      formDataToSend.append('sheetUrl', 'https://docs.google.com/spreadsheets/d/1S6XqHAwBj6NvZzkm9gSaWsY6qzPZf5Q_yHB9wXvA3_8/edit?usp=sharing');
+      
+      // Send the data
+      const response = await fetch(scriptURL, {
+        method: 'POST',
+        body: formDataToSend
+      });
+      
+      if (response.ok) {
+        // Show success message
+        setSubmitSuccess(true);
+        // Reset form
+        setFormData({
+          name: '',
+          organization: '',
+          phone: '',
+          email: ''
+        });
+        // Close modal after 3 seconds
+        setTimeout(() => {
+          setShowModal(false);
+          setSubmitSuccess(false);
+        }, 3000);
+      } else {
+        throw new Error('Network response was not ok');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitError('There was an error submitting your information. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     if (!containerRef.current || !canvasRef.current) return;
@@ -430,11 +505,128 @@ const Hero: React.FC = () => {
 
   return (
     <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center justify-center">
-      {/* Floating shapes container - positioned behind everything */}
-      <div className="absolute top-0 left-0 w-full h-full z-0">
-        {/* Shapes will be added here by JavaScript */}
-      </div>
-      
+      {/* Modal for booking demo */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-900 rounded-xl border border-gray-800 p-6 w-full max-w-md relative animate-fadeIn">
+            {/* Close button */}
+            <button 
+              onClick={() => setShowModal(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            
+            <h2 className="text-2xl font-bold mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">
+              Book Your Demo
+            </h2>
+            
+            {submitSuccess ? (
+              <div className="text-center py-8">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500 text-white mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold mb-2 text-white">Thank You!</h3>
+                <p className="text-gray-300">Your demo request has been submitted successfully. We'll contact you soon.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-1">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-white"
+                    placeholder="John Smith"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="organization" className="block text-sm font-medium text-gray-300 mb-1">
+                    Organization *
+                  </label>
+                  <input
+                    type="text"
+                    id="organization"
+                    name="organization"
+                    value={formData.organization}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-white"
+                    placeholder="Company Name"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-1">
+                    Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-white"
+                    placeholder="+1 (555) 123-4567"
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-white"
+                    placeholder="john@company.com"
+                  />
+                </div>
+                
+                {submitError && (
+                  <div className="text-red-500 text-sm py-2">
+                    {submitError}
+                  </div>
+                )}
+                
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 border border-transparent rounded-md shadow-lg hover:shadow-indigo-500/30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 disabled:opacity-70"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Submitting...
+                    </>
+                  ) : (
+                    'Submit Request'
+                  )}
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
       {/* Three.js container */}
       <div 
         ref={containerRef} 
@@ -469,12 +661,12 @@ const Hero: React.FC = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="#book-call" 
-              className="btn-primary"
+            <button 
+              onClick={() => setShowModal(true)}
+              className="btn-primary bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600"
             >
               Book Your Demo
-            </a>
+            </button>
             <a 
               href="#use-cases" 
               className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-gray-200 bg-gray-800/70 backdrop-blur-md border border-gray-700 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-300"
@@ -660,6 +852,15 @@ const Hero: React.FC = () => {
           100% {
             box-shadow: 0 0 15px rgba(150, 150, 255, 0.3);
           }
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 0.3s ease-out forwards;
         }
       `}</style>
     </section>
