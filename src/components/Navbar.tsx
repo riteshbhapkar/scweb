@@ -26,7 +26,7 @@ const Navbar = () => {
     <motion.nav
       className="fixed inset-0 top-4 w-[95%] sm:w-[90%] mx-auto bg-gradient-to-r from-gray-900 to-gray-800 font-medium text-white flex max-sm:justify-between gap-4 px-3 max-w-7xl items-center rounded-full h-14 p-5 overflow-hidden z-50"
       variants={{
-        long: { maxWidth: 950 },
+        long: { maxWidth: 700 },
         short: { maxWidth: 280 },
         hideNav: {
           height: 56,
@@ -57,8 +57,12 @@ const Navbar = () => {
           long: { width: 'auto' }
         }}
       >
-        <div className="min-w-[40px] min-h-[40px] rounded-full bg-white flex items-center justify-center">
-          <span className="font-bold text-gray-900">Logo</span>
+        <div className="w-[40px] h-[40px] rounded-full bg-white flex items-center justify-center overflow-hidden">
+          <img 
+            src="/logo.png" 
+            alt="Rivera Logo" 
+            className="w-11 h-11 object-cover rounded-full" 
+          />
         </div>
         
         <motion.div
