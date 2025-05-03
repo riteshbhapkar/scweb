@@ -109,7 +109,7 @@ const UseCases: React.FC = () => {
             What Magic Looks Like
           </h2>
           <p className="max-w-3xl mx-auto text-lg text-gray-300">
-            Harness the power of Rivera across multiple channels — The intelligence platform for predictable growth, working 24/7 to grow your business.
+            Harness the power of Sapphyr across multiple channels — The intelligence platform for predictable growth, working 24/7 to grow your business.
           </p>
         </div>
 

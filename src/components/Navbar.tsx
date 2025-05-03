@@ -60,7 +60,7 @@ const Navbar = () => {
         <div className="w-[40px] h-[40px] rounded-full bg-white flex items-center justify-center overflow-hidden">
           <img 
             src="/logo.png" 
-            alt="Rivera Logo" 
+            alt="Sapphyr Logo" 
             className="w-11 h-11 object-cover rounded-full" 
           />
         </div>
@@ -85,7 +85,7 @@ const Navbar = () => {
           animate={hidden ? "short" : "long"}
         >
           <span className="font-bold text-xl bg-gradient-to-r from-purple-400 to-indigo-500 text-transparent bg-clip-text whitespace-nowrap">
-            Rivera.AI
+            Sapphyr.AI
           </span>
         </motion.div>
       </motion.div>
