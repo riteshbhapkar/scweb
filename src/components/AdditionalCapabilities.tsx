@@ -15,9 +15,9 @@ const CapabilityTile: React.FC<{
         <h3 className="text-xl font-bold mb-2">{title}</h3>
         <p className="text-gray-300 mb-4 flex-grow">{description}</p>
         <div className="mt-auto">
-          <button className="inline-flex items-center text-indigo-400 hover:text-indigo-300 transition-colors">
+          {/* <button className="inline-flex items-center text-indigo-400 hover:text-indigo-300 transition-colors">
             Learn more <ArrowRight className="w-4 h-4 ml-1" />
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

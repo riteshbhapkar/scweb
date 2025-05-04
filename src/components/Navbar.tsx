@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   const [showNav, setShowNav] = useState<boolean>(false);
   const [hidden, setHidden] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('');
 
   const { scrollY } = useScroll();
 
@@ -22,9 +23,50 @@ const Navbar = () => {
     }
   });
 
+  // Add effect to track active section based on scroll position
+  useEffect(() => {
+    const sections = ['use-cases', 'capabilities', 'how-we-work', 'contact'];
+    
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 100; // Offset to trigger slightly before reaching section
+      
+      // Find the current section
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          
+          if (
+            scrollPosition >= offsetTop && 
+            scrollPosition < offsetTop + offsetHeight
+          ) {
+            setActiveSection(section);
+            return;
+          }
+        }
+      }
+      
+      // If no section is active (e.g., at the top of the page)
+      if (scrollPosition < 300) {
+        setActiveSection('');
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial position
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Helper function to determine if a section is active
+  const isActive = (section: string) => activeSection === section;
+
   return (
     <motion.nav
-      className="fixed inset-0 top-4 w-[95%] sm:w-[90%] mx-auto bg-gradient-to-r from-gray-900 to-gray-800 font-medium text-white flex max-sm:justify-between gap-4 px-3 max-w-7xl items-center rounded-full h-14 p-5 overflow-hidden z-50"
+      className="fixed inset-0 top-4 w-[95%] sm:w-[90%] mx-auto bg-gradient-to-r from-gray-900/95 via-gray-700/95 to-gray-900/95 animate-gradient-x backdrop-blur-sm font-medium text-white flex max-sm:justify-between gap-4 px-3 max-w-7xl items-center rounded-full h-14 p-5 overflow-hidden z-50 shadow-lg shadow-purple-500/10 border border-gray-700/30"
+      style={{ backgroundSize: '200% 200%' }}
       variants={{
         long: { maxWidth: 700 },
         short: { maxWidth: 280 },
@@ -66,7 +108,7 @@ const Navbar = () => {
         </div>
         
         <motion.div
-          className="overflow-hidden"
+          className="overflow-hidden flex items-center"
           variants={{
             short: { 
               width: 0, 
@@ -84,8 +126,8 @@ const Navbar = () => {
           initial="short"
           animate={hidden ? "short" : "long"}
         >
-          <span className="font-bold text-xl bg-gradient-to-r from-purple-400 to-indigo-500 text-transparent bg-clip-text whitespace-nowrap">
-            Sapphyr.AI
+          <span className="text-3xl bg-gradient-to-r from-purple-400 to-indigo-500 text-transparent bg-clip-text whitespace-nowrap -mt-2" style={{ fontFamily: 'Coolvetica, sans-serif' }}>
+            sapphyr
           </span>
         </motion.div>
       </motion.div>
@@ -115,16 +157,72 @@ const Navbar = () => {
         ]}
       >
         <li>
-          <a href="#use-cases">Use Cases</a>
+          <a 
+            href="#use-cases" 
+            className={`relative ${isActive('use-cases') ? 'text-white' : 'text-gray-300 hover:text-white'} transition-colors duration-300`}
+          >
+            Use Cases
+            {isActive('use-cases') && (
+              <motion.div 
+                className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-purple-400 to-indigo-500"
+                layoutId="navbarIndicator"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            )}
+          </a>
         </li>
         <li>
-          <a href="#capabilities">Capabilities</a>
+          <a 
+            href="#capabilities" 
+            className={`relative ${isActive('capabilities') ? 'text-white' : 'text-gray-300 hover:text-white'} transition-colors duration-300`}
+          >
+            Capabilities
+            {isActive('capabilities') && (
+              <motion.div 
+                className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-purple-400 to-indigo-500"
+                layoutId="navbarIndicator"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            )}
+          </a>
         </li>
         <li>
-          <a href="#how-we-work">How We Work</a>
+          <a 
+            href="#how-we-work" 
+            className={`relative ${isActive('how-we-work') ? 'text-white' : 'text-gray-300 hover:text-white'} transition-colors duration-300`}
+          >
+            How We Work
+            {isActive('how-we-work') && (
+              <motion.div 
+                className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-purple-400 to-indigo-500"
+                layoutId="navbarIndicator"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            )}
+          </a>
         </li>
         <li>
-          <a href="#contact">Contact</a>
+          <a 
+            href="#contact" 
+            className={`relative ${isActive('contact') ? 'text-white' : 'text-gray-300 hover:text-white'} transition-colors duration-300`}
+          >
+            Contact
+            {isActive('contact') && (
+              <motion.div 
+                className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-purple-400 to-indigo-500"
+                layoutId="navbarIndicator"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            )}
+          </a>
         </li>
       </motion.ul>
 
@@ -147,28 +245,36 @@ const Navbar = () => {
       >
         <a 
           href="#use-cases" 
-          className="rounded-full w-8 h-8 flex items-center justify-center bg-gradient-to-br from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/30"
+          className={`rounded-full w-8 h-8 flex items-center justify-center ${isActive('use-cases') 
+            ? 'bg-gradient-to-br from-purple-400 to-indigo-500 shadow-lg shadow-purple-500/30' 
+            : 'bg-gradient-to-br from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700'} transition-all duration-300`}
           title="Use Cases"
         >
           <BookOpen className="w-4 h-4" />
         </a>
         <a 
           href="#capabilities" 
-          className="rounded-full w-8 h-8 flex items-center justify-center bg-gradient-to-br from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/30"
+          className={`rounded-full w-8 h-8 flex items-center justify-center ${isActive('capabilities') 
+            ? 'bg-gradient-to-br from-purple-400 to-indigo-500 shadow-lg shadow-purple-500/30' 
+            : 'bg-gradient-to-br from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700'} transition-all duration-300`}
           title="Capabilities"
         >
           <MessageSquare className="w-4 h-4" />
         </a>
         <a 
           href="#how-we-work" 
-          className="rounded-full w-8 h-8 flex items-center justify-center bg-gradient-to-br from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/30"
+          className={`rounded-full w-8 h-8 flex items-center justify-center ${isActive('how-we-work') 
+            ? 'bg-gradient-to-br from-purple-400 to-indigo-500 shadow-lg shadow-purple-500/30' 
+            : 'bg-gradient-to-br from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700'} transition-all duration-300`}
           title="How We Work"
         >
           <ClipboardCheck className="w-4 h-4" />
         </a>
         <a 
           href="#contact" 
-          className="rounded-full w-8 h-8 flex items-center justify-center bg-gradient-to-br from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-purple-500/30"
+          className={`rounded-full w-8 h-8 flex items-center justify-center ${isActive('contact') 
+            ? 'bg-gradient-to-br from-purple-400 to-indigo-500 shadow-lg shadow-purple-500/30' 
+            : 'bg-gradient-to-br from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700'} transition-all duration-300`}
           title="Contact"
         >
           <Mail className="w-4 h-4" />

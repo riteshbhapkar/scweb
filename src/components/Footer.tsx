@@ -5,8 +5,8 @@ const Footer: React.FC = () => {
   return (
     <footer id="contact" className="bg-gray-950 text-gray-400">
       <div className="container-custom py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-          <div className="col-span-1 md:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="col-span-1">
             <div className="flex items-center space-x-2 mb-4">
               <Bot className="w-8 h-8 text-indigo-500" />
               <span className="text-xl font-bold text-white">Sapphyr</span>
@@ -14,6 +14,10 @@ const Footer: React.FC = () => {
             <p className="mb-4">
               The AI-native platform to power inbound-led growth for your professional services.
             </p>
+          </div>
+          
+          <div>
+            <h3 className="text-lg font-semibold text-white mb-4">Socials</h3>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-indigo-400 transition-colors">
                 <Twitter className="w-5 h-5" />
@@ -25,58 +29,6 @@ const Footer: React.FC = () => {
                 <Facebook className="w-5 h-5" />
               </a>
             </div>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Platform</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors inline-flex items-center">
-                  Voice <ArrowUpRight className="w-3 h-3 ml-1" />
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors inline-flex items-center">
-                  WhatsApp <ArrowUpRight className="w-3 h-3 ml-1" />
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors inline-flex items-center">
-                  Web Chat <ArrowUpRight className="w-3 h-3 ml-1" />
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors inline-flex items-center">
-                  Integrations <ArrowUpRight className="w-3 h-3 ml-1" />
-                </a>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Resources</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors inline-flex items-center">
-                  Blog <ArrowUpRight className="w-3 h-3 ml-1" />
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors inline-flex items-center">
-                  Case Studies <ArrowUpRight className="w-3 h-3 ml-1" />
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors inline-flex items-center">
-                  Documentation <ArrowUpRight className="w-3 h-3 ml-1" />
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-indigo-400 transition-colors inline-flex items-center">
-                  Pricing <ArrowUpRight className="w-3 h-3 ml-1" />
-                </a>
-              </li>
-            </ul>
           </div>
           
           <div>
@@ -98,19 +50,8 @@ const Footer: React.FC = () => {
           </div>
         </div>
         
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="border-t border-gray-800 pt-8 flex justify-center">
           <p>&copy; 2025 Sapphyr. All rights reserved.</p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-sm text-gray-400 hover:text-indigo-400 transition-colors">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-sm text-gray-400 hover:text-indigo-400 transition-colors">
-              Terms of Service
-            </a>
-            <a href="#" className="text-sm text-gray-400 hover:text-indigo-400 transition-colors">
-              Cookies
-            </a>
-          </div>
         </div>
       </div>
     </footer>

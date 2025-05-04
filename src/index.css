@@ -57,3 +57,28 @@
     @apply opacity-100 translate-y-0;
   }
 }
+
+
+@font-face {
+  font-family: 'Coolvetica';
+  src: url('/coolvetica/Coolvetica Rg.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Coolvetica';
+  src: url('/coolvetica/Coolvetica Rg It.otf') format('opentype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Coolvetica';
+  src: url('/coolvetica/Coolvetica Hv Comp.otf') format('opentype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
