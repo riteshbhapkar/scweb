@@ -1,0 +1,3144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swansight | AI-Powered Customer Experience Platform</title>
+    <meta name="description" content="Transform customer interactions with Swansight's AI + Data + Workflow platform. Engage, convert, and delight your customers with the Agent OS built for knowledge work.">
+    <link rel="canonical" href="https://swansight.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://swansight.com">
+    <meta property="og:title" content="Swansight | AI-Powered Customer Experience Platform">
+    <meta property="og:description" content="Transform customer interactions with Swansight's AI + Data + Workflow platform.">
+    <meta property="og:image" content="https://swansight.com/og-image.jpg">
+    
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Swansight | AI-Powered Customer Experience Platform">
+    <meta name="twitter:description" content="Transform customer interactions with Swansight's AI + Data + Workflow platform.">
+    <meta name="twitter:image" content="https://swansight.com/twitter-image.jpg">
+    
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    
+    <!-- jQuery (required for Slick) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Slick Carousel JS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    
+    <!-- Schema.org markup for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Swansight",
+      "url": "https://swansight.com",
+      "logo": "https://swansight.com/logo.svg",
+      "sameAs": [
+        "https://linkedin.com/company/swansight"
+      ]
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Swansight",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "AI-Powered Customer Experience Platform"
+    }
+    </script>
+    
+    <!-- Google Fonts - Match exactly with reference site -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Updated funky soft brighter colors
+                        deepBlack: '#050505', 
+                        bgDark: '#0F0F0F',
+                        cardBg: '#161616',
+                        violetPink: '#D946EF',
+                        electricBlue: '#2563EB',
+                        mintGreen: '#10B981',
+                        mutedGray: '#94A3B8',
+                        accent: '#A855F7',
+                        neonPurple: '#B026FF',
+                        comicBlue: '#4169E1',
+                        softBlue: '#87CEEB',
+                        brightGreen: '#39FF14',
+                        pastelPink: 'rgba(255, 163, 235, 0.94)',
+                        pastelBlue: 'rgb(117, 197, 250)',
+                        pastelPurple: 'rgb(200, 149, 234)',
+                        pastelYellow: 'rgb(250, 234, 153)',
+                        pastelGreen: 'rgb(140, 178, 141)',
+                        pastelCream: 'rgb(253, 230, 186)'
+                    },
+                    fontFamily: {
+                        'sans': ['DM Sans', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Three.js for true 3D disco ball -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <style>
+        body {
+            background-color: #050505;
+            color: #FFFFFF;
+            font-family: 'DM Sans', 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Header styling matching reference site */
+        header {
+            background-color: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        header:hover {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Nav link hover animation - exact match to reference site */
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 4px 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, #A855F7 0%, #D946EF 100%);
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+        
+        .nav-link:hover {
+            color: white;
+            transform: translateY(-1px);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Card styling matching reference site exactly */
+        .feature-card {
+            background-color: rgba(22, 22, 22, 0.8);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+            display: block !important; /* Ensure cards are always displayed */
+            visibility: visible !important; /* Ensure cards are always visible */
+            opacity: 1 !important; /* Ensure cards are fully opaque */
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            opacity: 0.3;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            border-radius: 16px;
+        }
+        
+        .feature-card:nth-child(1)::before {
+            background: linear-gradient(135deg, #B026FF, #D946EF);
+        }
+        
+        .feature-card:nth-child(2)::before {
+            background: linear-gradient(135deg, #4169E1, #87CEEB);
+        }
+        
+        .feature-card:nth-child(3)::before {
+            background: linear-gradient(135deg, #10B981, #39FF14);
+        }
+        
+        .feature-card:nth-child(4)::before {
+            background: linear-gradient(135deg, #D946EF, #B026FF);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+            filter: brightness(1.1);
+        }
+        
+        .feature-card:hover::before {
+            opacity: 0.6;
+            transform: scale(1.03);
+        }
+        
+        /* Enhanced hover effects for intelligence cards */
+        .intelligence-card:hover h3 {
+            color: white !important;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        
+        .intelligence-card:hover p, 
+        .intelligence-card:hover .count-up,
+        .intelligence-card:hover .text-gray-400 {
+            color: rgba(255, 255, 255, 0.9) !important;
+        }
+        
+        /* Custom styling for each intelligence card - matching testimonial design */
+        .intelligence-container .intelligence-card:nth-child(1):hover::before {
+            background: linear-gradient(135deg, #B026FF, #D946EF);
+            opacity: 0.7;
+            transform: scale(1.03);
+        }
+        
+        .intelligence-container .intelligence-card:nth-child(2):hover::before {
+            background: linear-gradient(135deg, #4169E1, #87CEEB);
+            opacity: 0.7;
+            transform: scale(1.03);
+        }
+        
+        .intelligence-container .intelligence-card:nth-child(3):hover::before {
+            background: linear-gradient(135deg, #10B981, #39FF14);
+            opacity: 0.7;
+            transform: scale(1.03);
+        }
+        
+        .intelligence-container .intelligence-card:nth-child(4):hover::before {
+            background: linear-gradient(135deg, #D946EF, #B026FF);
+            opacity: 0.7;
+            transform: scale(1.03);
+        }
+        
+        /* Heading styles matching reference site */
+        h1 {
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+        
+        h2 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        
+        h3 {
+            font-weight: 600;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #A855F7 0%, #D946EF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Button styling matching reference site */
+        .primary-button {
+            background: linear-gradient(90deg, #A855F7 0%, #D946EF 100%);
+            border-radius: 8px;
+            padding: 14px 28px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+        }
+        
+        .primary-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.4);
+        }
+        
+        /* Enhanced floating shapes - geometric design system with more pronounced neon edges */
+        .floating-shape {
+            position: fixed; /* To float throughout the site */
+            background: rgba(255, 255, 255, 0.075); /* Slightly increased from 0.06 for better visibility */
+            z-index: 0;
+            opacity: 0.7; /* Increased from 0.65 for better visibility */
+            pointer-events: none;
+            transform-origin: center;
+            border: 1px solid rgba(255, 255, 255, 0.25); /* Increased from 0.15 for more pronounced edges */
+            transition: transform 0.3s ease-in-out;
+            backdrop-filter: blur(5px); /* Enhanced glass effect */
+            -webkit-backdrop-filter: blur(5px);
+            box-shadow: 0 0 25px rgba(120, 120, 255, 0.3); /* Enhanced neon glow effect */
+            will-change: transform; /* Improves animation performance */
+            transform: translate3d(0, 0, 0); /* Force hardware acceleration */
+            animation: pulse-glow 5s infinite ease-in-out;
+            border-radius: 12px; /* Enhanced rounded corners for all shapes */
+        }
+        
+        /* Size variants - 3 distinct categories with more pronounced differences */
+        .floating-shape.small {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .floating-shape.medium {
+            width: 70px;
+            height: 70px;
+        }
+        
+        .floating-shape.large {
+            width: 130px;
+            height: 130px;
+        }
+        
+        /* Rounded square */
+        .floating-shape.rounded-square {
+            border-radius: 16px;
+        }
+        
+        /* Circle */
+        .floating-shape.circle {
+            border-radius: 50%;
+        }
+        
+        /* Parallelogram - eased out with rounded corners */
+        .floating-shape.parallelogram {
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+            border-radius: 8px;
+        }
+        
+        /* Plus sign with rounded corners */
+        .floating-shape.plus {
+            clip-path: polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%);
+            border-radius: 8px;
+        }
+        
+        /* Hexagon with rounded corners */
+        .floating-shape.hexagon {
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            border-radius: 8px;
+        }
+        
+        /* Rhombus with rounded corners */
+        .floating-shape.rhombus {
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            border-radius: 8px;
+        }
+        
+        /* Pentagon with rounded corners */
+        .floating-shape.pentagon {
+            clip-path: polygon(50% 0%, 100% 40%, 80% 100%, 20% 100%, 0% 40%);
+            border-radius: 8px;
+        }
+        
+        /* Enhanced neon lighting effect */
+        .floating-shape::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            clip-path: inherit;
+            opacity: 0.85;
+            box-shadow: 0 0 10px rgba(200, 200, 255, 0.3) inset;
+        }
+        
+        /* Added stronger neon border glow effect */
+        .floating-shape::before {
+            content: '';
+            position: absolute;
+            inset: -2px; /* Slightly larger than the shape */
+            border-radius: inherit;
+            clip-path: inherit;
+            opacity: 0.7; /* Increased from 0.6 */
+            z-index: -1;
+            filter: blur(5px); /* Increased blur for more glow */
+        }
+        
+        /* Soft mint */
+        .floating-shape.mint::after {
+            background: linear-gradient(135deg, 
+                rgba(19, 206, 102, 0.15) 0%, 
+                rgba(19, 206, 102, 0.3) 100%);
+        }
+        .floating-shape.mint::before {
+            background: rgba(19, 206, 102, 0.4);
+            box-shadow: 0 0 15px rgba(19, 206, 102, 0.7);
+        }
+        
+        /* Soft cyan */
+        .floating-shape.cyan::after {
+            background: linear-gradient(135deg, 
+                rgba(6, 182, 212, 0.15) 0%, 
+                rgba(6, 182, 212, 0.3) 100%);
+        }
+        .floating-shape.cyan::before {
+            background: rgba(6, 182, 212, 0.4);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.7);
+        }
+        
+        /* Soft purple */
+        .floating-shape.purple::after {
+            background: linear-gradient(135deg, 
+                rgba(147, 51, 234, 0.15) 0%, 
+                rgba(147, 51, 234, 0.3) 100%);
+        }
+        .floating-shape.purple::before {
+            background: rgba(147, 51, 234, 0.4);
+            box-shadow: 0 0 15px rgba(147, 51, 234, 0.7);
+        }
+        
+        /* Soft pink */
+        .floating-shape.pink::after {
+            background: linear-gradient(135deg, 
+                rgba(236, 72, 153, 0.15) 0%, 
+                rgba(236, 72, 153, 0.3) 100%);
+        }
+        .floating-shape.pink::before {
+            background: rgba(236, 72, 153, 0.4);
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.7);
+        }
+        
+        /* Soft blue */
+        .floating-shape.blue::after {
+            background: linear-gradient(135deg, 
+                rgba(59, 130, 246, 0.15) 0%, 
+                rgba(59, 130, 246, 0.3) 100%);
+        }
+        .floating-shape.blue::before {
+            background: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.7);
+        }
+        
+        /* Soft amber */
+        .floating-shape.amber::after {
+            background: linear-gradient(135deg, 
+                rgba(251, 191, 36, 0.15) 0%, 
+                rgba(251, 191, 36, 0.3) 100%);
+        }
+        .floating-shape.amber::before {
+            background: rgba(251, 191, 36, 0.4);
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.7);
+        }
+        
+        /* Main disco ball styling - corrected positioning */
+        .main-disco-ball {
+            position: absolute;
+            width: 260px; /* Adjusted for better proportions */
+            height: 260px;
+            top: -30px; /* Adjusted for better alignment with P */
+            left: -65px; /* Position to protrude from the P */
+            border-radius: 50%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.9) 0%, 
+                rgba(180, 180, 180, 0.8) 20%, 
+                rgba(150, 150, 150, 0.4) 50%,
+                rgba(60, 60, 60, 0.3) 85%);
+            box-shadow: 
+                0 0 30px rgba(255, 255, 255, 0.7),
+                0 0 60px rgba(168, 85, 247, 0.6),
+                0 0 90px rgba(217, 70, 239, 0.4);
+            z-index: -1; /* Behind the text */
+            transform-style: preserve-3d;
+            transform: rotate3d(1, 0.3, 0, 20deg); /* Earth-like tilt */
+            animation: disco-spin 20s linear infinite;
+            /* Hide 20% of the ball with a clip path - adjusted for positioning */
+            clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%);
+            pointer-events: none;
+        }
+        
+        /* Mirror facets effect with grid - enhanced for better 3D look */
+        .main-disco-ball::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            background-image: 
+                linear-gradient(90deg, transparent 92%, rgba(255, 255, 255, 0.9) 8%),
+                linear-gradient(0deg, transparent 92%, rgba(255, 255, 255, 0.9) 8%);
+            background-size: 15px 15px; /* Smaller facets */
+            background-position: center center;
+            opacity: 0.85;
+            mix-blend-mode: soft-light;
+            transform-style: preserve-3d;
+            transform: rotate(45deg); /* Offset grid for diamond pattern */
+            animation: disco-sparkle 3s ease infinite, disco-rotate 30s linear infinite;
+        }
+        
+        /* Add another layer for more complex facets */
+        .main-disco-ball::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            background: 
+                radial-gradient(
+                    circle at 30% 25%,
+                    rgba(255, 255, 255, 1) 0%,
+                    rgba(255, 255, 255, 0.6) 15%,
+                    rgba(255, 255, 255, 0) 40%
+                ),
+                radial-gradient(
+                    circle at 65% 60%,
+                    rgba(255, 255, 255, 0.8) 0%,
+                    rgba(255, 255, 255, 0.3) 25%,
+                    rgba(255, 255, 255, 0) 50%
+                );
+            filter: blur(2px);
+            opacity: 0.8;
+            mix-blend-mode: overlay;
+            animation: disco-highlight 6s ease-in-out infinite alternate;
+        }
+        
+        /* Add a third layer to create more realistic highlights */
+        .main-disco-ball-highlight {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: 
+                radial-gradient(
+                    circle at 30% 30%, 
+                    rgba(255, 255, 255, 0.9) 0%,
+                    rgba(255, 255, 255, 0.4) 20%,
+                    transparent 50%
+                );
+            z-index: 1;
+            pointer-events: none;
+            animation: disco-rotate-opposite 15s linear infinite;
+        }
+        
+        @keyframes disco-rotate {
+            0% { transform: rotate(45deg); }
+            100% { transform: rotate(405deg); }
+        }
+        
+        @keyframes disco-rotate-opposite {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+        
+        /* Key frame for the sparkle effect - more varied */
+        @keyframes disco-sparkle {
+            0% { opacity: 0.85; filter: brightness(1.0); }
+            25% { opacity: 0.95; filter: brightness(1.2); }
+            50% { opacity: 1; filter: brightness(1.4); }
+            75% { opacity: 0.9; filter: brightness(1.1); }
+            100% { opacity: 0.85; filter: brightness(1.0); }
+        }
+        
+        /* Keyframes for disco ball spinning like Earth with tilt */
+        @keyframes disco-spin {
+            0% { transform: rotate3d(1, 0.3, 0, 20deg) rotateY(0deg); }
+            100% { transform: rotate3d(1, 0.3, 0, 20deg) rotateY(360deg); }
+        }
+        
+        /* Top glitter/highlight effect */
+        .main-disco-ball::after {
+            content: '';
+            position: absolute;
+            width: 40%;
+            height: 40%;
+            top: 5%;
+            left: 30%;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle at center,
+                rgba(255, 255, 255, 1) 0%,
+                rgba(255, 255, 255, 0.8) 30%,
+                rgba(255, 255, 255, 0) 70%
+            );
+            filter: blur(5px);
+            opacity: 0.9;
+            animation: disco-highlight 6s ease-in-out infinite alternate;
+        }
+        
+        /* Create a neon glow around the disco ball */
+        .disco-glow {
+            position: absolute;
+            top: -30px;
+            left: -65px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: transparent;
+            box-shadow: 
+                0 0 40px rgba(255, 20, 147, 0.5),
+                0 0 80px rgba(138, 43, 226, 0.4),
+                0 0 120px rgba(0, 191, 255, 0.3);
+            filter: blur(10px);
+            opacity: 0.6;
+            z-index: -2;
+            clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%);
+            animation: disco-glow 8s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+        
+        @keyframes disco-glow {
+            0% { opacity: 0.5; filter: blur(10px); }
+            50% { opacity: 0.7; filter: blur(15px); }
+            100% { opacity: 0.6; filter: blur(12px); }
+        }
+        
+        /* Position the disco ball correctly in the heading */
+        .hero-heading {
+            position: relative;
+        }
+        
+        /* Relative positioning for the P container */
+        .hero-heading span:first-child {
+            position: relative;
+            z-index: 1;
+            color: white; /* Ensure text is visible */
+        }
+        
+        /* The visible P text needs to be above the disco ball */
+        .hero-heading span:first-child > span:first-child {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Small disco balls */
+        .disco-ball {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, 
+                rgba(255, 255, 255, 0.95), 
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0.1) 70%);
+            border-radius: 50%;
+            box-shadow: 
+                inset 0 0 30px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(255, 255, 255, 0.4),
+                0 0 60px rgba(168, 85, 247, 0.3),
+                0 0 80px rgba(217, 70, 239, 0.2);
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 0;
+            transform-style: preserve-3d;
+            animation: rotate 20s linear infinite;
+        }
+        
+        .disco-ball::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%) 0 0 / 8px 8px,
+                linear-gradient(0deg, transparent 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%) 0 0 / 8px 8px;
+            border-radius: 50%;
+            animation: sparkle 3s linear infinite;
+        }
+        
+        .disco-ball::after {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: 20%;
+            width: 20%;
+            height: 20%;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            filter: blur(5px);
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes sparkle {
+            0% { opacity: 0.4; }
+            50% { opacity: 0.9; }
+            100% { opacity: 0.4; }
+        }
+        
+        /* Typewriter cursor effect */
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: #FF6AD5; /* Match the typewriter text color */
+            margin-left: 4px;
+            animation: blink 0.7s infinite;
+            vertical-align: middle;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Process section styling */
+        .process-timeline {
+            position: relative;
+        }
+        
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 1px;
+            background: linear-gradient(to bottom, rgba(168, 85, 247, 0.5), rgba(217, 70, 239, 0.5));
+            transform: translateX(-50%);
+        }
+        
+        .process-step {
+            position: relative;
+            margin-bottom: 80px;
+        }
+        
+        .process-number {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+        }
+        
+        .process-step-left {
+            padding-right: calc(50% + 40px);
+        }
+        
+        .process-step-left .process-number {
+            right: calc(50% - 20px);
+        }
+        
+        .process-step-right {
+            padding-left: calc(50% + 40px);
+        }
+        
+        .process-step-right .process-number {
+            left: calc(50% - 20px);
+        }
+        
+        /* Process cards with solid color backgrounds */
+        .process-step:nth-child(1) .feature-card::before {
+            background: linear-gradient(135deg, #B026FF, #D946EF);
+        }
+        
+        .process-step:nth-child(2) .feature-card::before {
+            background: linear-gradient(135deg, #4169E1, #87CEEB);
+        }
+        
+        .process-step:nth-child(3) .feature-card::before {
+            background: linear-gradient(135deg, #10B981, #39FF14);
+        }
+        
+        .process-step:nth-child(4) .feature-card::before {
+            background: linear-gradient(135deg, #D946EF, #B026FF);
+        }
+        
+        /* Testimonial styling with infinite scroll - one card at a time */
+        .testimonial-carousel {
+            position: relative;
+            overflow: visible;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 60px 0; /* Increased padding to prevent overflow on hover */
+        }
+        
+        .testimonial-carousel .slick-slide {
+            opacity: 0.5;
+            transform: scale(0.9);
+            transition: all 0.5s ease;
+            transform-origin: center center; /* Ensure scaling happens from the center */
+            pointer-events: none; /* Disable interaction with non-active slides */
+            visibility: visible !important; /* Make all slides visible */
+        }
+        
+        .testimonial-carousel .slick-center {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto; /* Enable interaction with active slide */
+            visibility: visible !important; /* Show active slide */
+        }
+        
+        .testimonial-carousel .feature-card {
+            background: rgba(30, 30, 30, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+            transform: translateZ(0); /* Force hardware acceleration */
+            display: block !important; /* Ensure cards are displayed */
+            visibility: visible !important; /* Ensure cards are visible */
+        }
+        
+        /* Custom arrows for testimonial carousel */
+        .testimonial-carousel .slick-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            font-size: 0;
+            border: none;
+        }
+        
+        .testimonial-carousel .slick-prev {
+            left: -50px;
+        }
+        
+        .testimonial-carousel .slick-next {
+            right: -50px;
+        }
+        
+        .testimonial-carousel .slick-arrow:before {
+            font-size: 24px;
+            color: white;
+            opacity: 1;
+        }
+        
+        .testimonial-carousel .slick-arrow:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Custom dots for both carousels */
+        .slick-dots {
+            bottom: -30px;
+            position: absolute;
+            display: flex !important;
+            justify-content: center;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        .slick-dots li {
+            position: relative;
+            display: inline-block;
+            margin: 0 5px;
+            padding: 0;
+            cursor: pointer;
+        }
+        
+        .slick-dots li button {
+            font-size: 0;
+            line-height: 0;
+            display: block;
+            width: 10px;
+            height: 10px;
+            padding: 5px;
+            cursor: pointer;
+            color: transparent;
+            border: 0;
+            outline: none;
+            background: transparent;
+        }
+        
+        .slick-dots li button:before {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            opacity: 1;
+        }
+        
+        .slick-dots li.slick-active button:before {
+            color: white;
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .testimonial-carousel .slick-prev {
+                left: 10px;
+            }
+            
+            .testimonial-carousel .slick-next {
+                right: 10px;
+            }
+            
+            .intelligence-carousel .slick-prev {
+                left: -15px;
+            }
+            
+            .intelligence-carousel .slick-next {
+                right: -15px;
+            }
+        }
+
+        /* Intelligence section styling with infinite scroll */
+        .intelligence-carousel {
+            position: relative;
+            overflow: visible; /* Changed from hidden to visible to show arrows outside */
+            padding: 60px 0; /* Increased padding to prevent overflow on hover */
+            margin: 0 40px; /* Added margin to make room for arrows */
+        }
+
+        .intelligence-container {
+            display: flex;
+            gap: 2rem;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Smoother easing */
+            padding: 0 20px;
+            will-change: transform;
+            backface-visibility: hidden; /* Prevent flickering */
+            -webkit-backface-visibility: hidden;
+            transform: translateZ(0); /* Force hardware acceleration */
+        }
+
+        .intelligence-card {
+            flex: 0 0 calc(100% - 40px);
+            max-width: 100%;
+            transition: all 0.4s ease;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .intelligence-card {
+                flex: 0 0 calc(50% - 40px);
+                max-width: calc(50% - 40px);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .intelligence-card {
+                flex: 0 0 calc(50% - 40px); /* Show exactly 2 cards at a time */
+                max-width: calc(50% - 40px);
+            }
+        }
+
+        .intelligence-nav {
+            display: none;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100; /* Increased z-index to ensure clickability */
+            cursor: pointer;
+            pointer-events: auto; /* Ensure clicks go through */
+        }
+
+        @media (min-width: 768px) {
+            .intelligence-nav {
+                display: block;
+            }
+        }
+
+        .intelligence-nav-prev {
+            left: 20px;
+        }
+
+        .intelligence-nav-next {
+            right: 20px;
+        }
+
+        .intelligence-nav-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100; /* Ensure buttons are clickable */
+        }
+
+        .intelligence-nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .intelligence-nav-button svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+        }
+
+        /* Mobile menu styling */
+        #mobile-menu {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 100; /* Higher z-index to ensure it's above everything */
+        }
+
+        #mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        #mobile-menu-button {
+            z-index: 101; /* Higher than the menu to ensure it's always clickable */
+            padding: 8px;
+            margin-right: 5px;
+            background-color: rgba(5, 5, 5, 0.8);
+            border-radius: 8px;
+        }
+
+        #mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(5, 5, 5, 0.8);
+            border-radius: 50%;
+            padding: 8px;
+            z-index: 102;
+        }
+
+        /* Mobile menu item styling */
+        .mobile-menu-item {
+            display: block;
+            padding: 10px 20px;
+            background: rgba(30, 30, 40, 0.9);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            color: #f0f0f0;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-width: 160px;
+        }
+
+        .mobile-menu-item:hover, .mobile-menu-item:focus {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.8), rgba(75, 0, 130, 0.8));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+        .primary-button-mobile {
+            background: linear-gradient(135deg, #8a2be2, #4b0082);
+            color: white;
+            border: none;
+            font-weight: 600;
+        }
+
+        .primary-button-mobile:hover {
+            background: linear-gradient(135deg, #9d3ff5, #5c0a9e);
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Hero content positioning */
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Highlight animation for the top glitter */
+        @keyframes disco-highlight {
+            0% { 
+                transform: scale(0.9) translate(0px, 0px);
+                opacity: 0.7;
+                filter: blur(5px);
+            }
+            50% { 
+                transform: scale(1.1) translate(10px, -5px);
+                opacity: 1;
+                filter: blur(4px);
+            }
+            100% { 
+                transform: scale(0.95) translate(-5px, 3px);
+                opacity: 0.8;
+                filter: blur(6px);
+            }
+        }
+
+        /* Create a neon glow around the disco ball */
+        .disco-glow {
+            position: absolute;
+            top: -30px;
+            left: -65px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: transparent;
+            box-shadow: 
+                0 0 40px rgba(255, 20, 147, 0.5),
+                0 0 80px rgba(138, 43, 226, 0.4),
+                0 0 120px rgba(0, 191, 255, 0.3);
+            filter: blur(10px);
+            opacity: 0.6;
+            z-index: -2;
+            clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 20% 100%);
+            animation: disco-glow 8s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+        
+        @keyframes disco-glow {
+            0% { opacity: 0.5; filter: blur(10px); }
+            50% { opacity: 0.7; filter: blur(15px); }
+            100% { opacity: 0.6; filter: blur(12px); }
+        }
+        
+        /* Remove all previous disco ball related styles */
+        .main-disco-ball,
+        .main-disco-ball::before,
+        .main-disco-ball::after,
+        .main-disco-ball-highlight,
+        .disco-glow,
+        .disco-ball-container,
+        .disco-ball-3d,
+        .disco-facet,
+        .disco-reflection,
+        .disco-glow-3d,
+        .disco-highlight,
+        .facets-container {
+            display: none;
+        }
+        
+        /* Three.js disco ball container */
+        #disco-ball-container {
+            position: absolute;
+            top: -80px; /* Adjusted from -130px to move it down */
+            left: 50%; /* Slightly more to the right to feel more central */
+            transform: translateX(-50%); /* Center horizontally */
+            width: 250px; /* Increased size by ~25% */
+            height: 250px;
+            z-index: 0; /* Behind text but in front of backgrounds */
+            pointer-events: none; /* Don't capture mouse events */
+            overflow: hidden; /* Hide the bottom portion */
+            clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 80%); /* Show 80% of the ball */
+            background: transparent; /* Ensure no background */
+        }
+        
+        /* Ensure the hero text is above the disco ball */
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Glow effect around the disco ball */
+        .disco-glow-webgl {
+            position: absolute;
+            top: -80px; /* Adjusted from -130px to match disco ball container */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            filter: blur(20px);
+            opacity: 0.6;
+            z-index: -1;
+            background: transparent;
+            box-shadow: 
+                0 0 50px rgba(255, 20, 147, 0.5),
+                0 0 80px rgba(138, 43, 226, 0.4),
+                0 0 120px rgba(0, 191, 255, 0.3);
+            animation: disco-glow-pulse 5s infinite alternate;
+            pointer-events: none;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 80%); /* Match container */
+        }
+        
+        @keyframes disco-glow-pulse {
+            0% { 
+                opacity: 0.5;
+                filter: blur(20px);
+            }
+            50% {
+                opacity: 0.7;
+                filter: blur(30px);
+            }
+            100% {
+                opacity: 0.6;
+                filter: blur(25px);
+            }
+        }
+
+        /* Add text shadow to improve readability of the heading text */
+        .hero-heading {
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            color: white; /* Default color for all text */
+        }
+
+        /* Solid color for "Put AI to work for your" - use a funkier, softer pink */
+        .hero-heading .vibrant-text {
+            color: #FF8AD8 !important; /* Funkier, softer pink for better readability */
+            text-shadow: 
+                0 0 15px rgba(255, 138, 216, 0.6), /* Stronger glow for better visibility */
+                0 1px 3px rgba(0, 0, 0, 0.8); /* Darker shadow for contrast */
+            position: relative;
+            font-weight: 800; /* Ensure bold font weight */
+            /* Override any potential background that might interfere */
+            background: none !important;
+            -webkit-background-clip: initial !important;
+            -webkit-text-fill-color: #FF8AD8 !important;
+            background-clip: initial !important;
+        }
+
+        /* Style for the "your" part to match the "Put AI to work for" part */
+        .hero-heading > span:not(.vibrant-text) {
+            color: #FF8AD8 !important; /* Same pink color as "Put AI to work for" */
+            text-shadow: 
+                0 0 15px rgba(255, 138, 216, 0.6), /* Same shadow as vibrant-text */
+                0 1px 3px rgba(0, 0, 0, 0.8);
+            font-weight: 800;
+            /* Override any potential background that might interfere */
+            background: none !important;
+            -webkit-background-clip: initial !important;
+            -webkit-text-fill-color: #FF8AD8 !important;
+            background-clip: initial !important;
+        }
+
+        /* Solid color for the typewriter text - now green instead of pink */
+        #typewriter.gradient-text {
+            color: #00FFC8 !important; /* Soft green color */
+            text-shadow: 0 0 10px rgba(0, 255, 200, 0.3); /* Subtle glow */
+            background: none !important; /* Remove gradient */
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: #00FFC8 !important; /* Force the solid color */
+            background-clip: text !important;
+        }
+
+        /* Rounded square */
+        .floating-shape.rounded-square {
+            border-radius: 25%;
+        }
+
+        /* Circle */
+        .floating-shape.circle {
+            border-radius: 50%;
+        }
+
+        /* Add more tetris shapes - new shapes */
+        /* Tetris W shape */
+        .floating-shape.tetris-w {
+            clip-path: polygon(0 0, 33% 0, 33% 33%, 66% 33%, 66% 66%, 100% 66%, 100% 100%, 66% 100%, 66% 66%, 33% 66%, 33% 33%, 0 33%);
+            border-radius: 2px; /* Unified border-radius for authentic Tetris look */
+        }
+
+        /* Tetris P shape */
+        .floating-shape.tetris-p {
+            clip-path: polygon(0 0, 66% 0, 66% 66%, 33% 66%, 33% 100%, 0 100%);
+            border-radius: 2px; /* Unified border-radius for authentic Tetris look */
+        }
+
+        /* Tetris H shape */
+        .floating-shape.tetris-h {
+            clip-path: polygon(0 0, 33% 0, 33% 33%, 66% 33%, 66% 0, 100% 0, 100% 100%, 66% 100%, 66% 66%, 33% 66%, 33% 100%, 0 100%);
+            border-radius: 2px; /* Unified border-radius for authentic Tetris look */
+        }
+
+        /* Tetris X shape */
+        .floating-shape.tetris-x {
+            clip-path: polygon(0 0, 33% 0, 33% 33%, 66% 33%, 66% 0, 100% 0, 100% 33%, 66% 33%, 66% 66%, 100% 66%, 100% 100%, 66% 100%, 66% 66%, 33% 66%, 33% 100%, 0 100%, 0 66%, 33% 66%, 33% 33%, 0 33%);
+            border-radius: 2px; /* Unified border-radius for authentic Tetris look */
+        }
+
+        /* Tetris L-block with rounded corners */
+        .floating-shape.tetris-l {
+            width: 60px;
+            height: 90px;
+            clip-path: polygon(
+                0% 0%, 40% 0%, 40% 60%, 100% 60%, 
+                100% 100%, 0% 100%
+            );
+            border-radius: 12px;
+        }
+
+        /* Tetris T-block with rounded corners */
+        .floating-shape.tetris-t {
+            width: 90px;
+            height: 60px;
+            clip-path: polygon(
+                0% 0%, 100% 0%, 100% 40%, 70% 40%,
+                70% 100%, 30% 100%, 30% 40%, 0% 40%
+            );
+            border-radius: 12px;
+        }
+
+        /* Tetris S-block with rounded corners */
+        .floating-shape.tetris-s {
+            width: 90px;
+            height: 60px;
+            clip-path: polygon(
+                30% 0%, 100% 0%, 100% 40%, 70% 40%,
+                70% 100%, 0% 100%, 0% 60%, 30% 60%
+            );
+            border-radius: 12px;
+        }
+
+        /* Tetris Z-block with rounded corners */
+        .floating-shape.tetris-z {
+            width: 90px;
+            height: 60px;
+            clip-path: polygon(
+                0% 0%, 70% 0%, 70% 60%, 100% 60%,
+                100% 100%, 30% 100%, 30% 40%, 0% 40%
+            );
+            border-radius: 12px;
+        }
+
+        /* Make all tetris shapes have sharper edges */
+        .floating-shape.tetris-t,
+        .floating-shape.tetris-l,
+        .floating-shape.tetris-j,
+        .floating-shape.tetris-z,
+        .floating-shape.tetris-s,
+        .floating-shape.tetris-plus,
+        .floating-shape.tetris-u,
+        .floating-shape.tetris-w,
+        .floating-shape.tetris-p,
+        .floating-shape.tetris-h,
+        .floating-shape.tetris-x {
+            border-radius: 2px; /* Unified border-radius for authentic Tetris look */
+        }
+
+        /* Add a subtle pulsing animation to all shapes for more noticeable movement */
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 15px rgba(100, 100, 255, 0.15);
+                opacity: 0.7;
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(120, 120, 255, 0.35);
+                opacity: 0.9;
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(100, 100, 255, 0.15);
+                opacity: 0.7;
+            }
+        }
+
+        .floating-shape {
+            animation: pulse-glow 5s infinite ease-in-out;
+        }
+
+        /* Enhanced color-specific glow effects */
+        .floating-shape.purple {
+            box-shadow: 0 0 25px rgba(176, 38, 255, 0.3);
+            border-color: rgba(176, 38, 255, 0.4);
+        }
+        
+        .floating-shape.pink {
+            box-shadow: 0 0 25px rgba(217, 70, 239, 0.3);
+            border-color: rgba(217, 70, 239, 0.4);
+        }
+        
+        .floating-shape.blue {
+            box-shadow: 0 0 25px rgba(65, 105, 225, 0.3);
+            border-color: rgba(65, 105, 225, 0.4);
+        }
+        
+        .floating-shape.cyan {
+            box-shadow: 0 0 25px rgba(135, 206, 235, 0.3);
+            border-color: rgba(135, 206, 235, 0.4);
+        }
+        
+        .floating-shape.mint {
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.3);
+            border-color: rgba(16, 185, 129, 0.4);
+        }
+        
+        .floating-shape.amber {
+            box-shadow: 0 0 25px rgba(251, 191, 36, 0.3);
+            border-color: rgba(251, 191, 36, 0.4);
+        }
+
+        /* Ensure a smooth scrolling experience for the whole page */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Add a smooth transition for all sections */
+        section {
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            will-change: opacity, transform;
+            backface-visibility: hidden;
+        }
+
+        /* Improve initial page load transition */
+        body {
+            transition: opacity 0.3s ease-in-out;
+            scroll-behavior: smooth;
+        }
+        
+        /* Enhance smooth scrolling globally */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Style for when the page is fully loaded - show animations properly */
+        .page-loaded .floating-shape {
+            animation-play-state: running;
+        }
+
+        /* Optimize for hardware acceleration throughout */
+        .floating-shape,
+        .testimonial-container,
+        .intelligence-container,
+        .hero-heading,
+        .primary-button {
+            will-change: transform;
+            transform: translateZ(0);
+        }
+        
+        /* Enhance section transitions */
+        .page-loaded section {
+            animation: sectionFadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes sectionFadeIn {
+            from {
+                opacity: 0.8;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Improve visibility of all UI elements on the page */
+        section {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Optimize for hardware acceleration throughout */
+        .floating-shape,
+        .testimonial-container,
+        .intelligence-container,
+        .hero-heading,
+        .primary-button,
+        section {
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        
+        /* Ensure content is visually separated from shapes */
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Ensure animations run properly */
+        .animations-enabled .floating-shape {
+            animation-play-state: running !important;
+        }
+        
+        /* Ensure floating shapes are visible throughout the page */
+        #floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: visible;
+            pointer-events: none;
+            /* Using min-height with vh units to cover page while respecting content */
+            min-height: 100vh;
+            /* Ensure shapes don't appear below footer */
+            max-height: calc(100% - 100px);
+        }
+        
+        /* Make sure shapes are visible on all sections */
+        section {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Footer styling to ensure it's at the bottom with no whitespace below */
+        footer {
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            margin-top: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            clear: both;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        /* Ensure the body and html take up the full height but don't exceed it */
+        html, body {
+            min-height: 100%;
+            height: auto;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* Remove any potential extra space after footer */
+        body {
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        /* Specific fix for the whitespace below the footer */
+        body::after {
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 3;
+        }
+        
+        /* Make sure shapes only appear once and animate immediately */
+        .floating-shape {
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
+            position: absolute; /* Ensure absolute positioning relative to container */
+            animation-play-state: running !important; /* Ensure animations run immediately */
+            animation-delay: 0ms !important; /* No delay */
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+        
+        /* Ensure animations run immediately without waiting */
+        .floating-shape {
+            animation-delay: 0ms !important;
+        }
+        
+        /* Style for when the page is fully loaded - show animations properly */
+        .page-loaded .floating-shape {
+            animation-play-state: running !important;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 0.7; }
+        }
+
+        /* Slick Carousel Custom Styling */
+        .slick-slide {
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+
+        /* Intelligence carousel styling */
+        .intelligence-carousel {
+            position: relative;
+            overflow: visible; /* Changed from hidden to visible to show arrows outside */
+            padding: 60px 0; /* Increased padding to prevent overflow on hover */
+            margin: 0 40px; /* Added margin to make room for arrows */
+        }
+
+        .intelligence-carousel .slick-slide {
+            opacity: 1;
+            transition: all 0.3s ease;
+            transform-origin: center center; /* Ensure scaling happens from the center */
+        }
+
+        .intelligence-carousel .feature-card {
+            height: 320px; /* Fixed height for all cards */
+            margin: 0 10px;
+            background: rgba(30, 30, 30, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+            transform: translateZ(0); /* Force hardware acceleration */
+        }
+
+        /* Custom arrows specifically for intelligence carousel */
+        .intelligence-carousel .slick-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            font-size: 0;
+            border: none;
+        }
+
+        .intelligence-carousel .slick-prev {
+            left: -30px;
+        }
+
+        .intelligence-carousel .slick-next {
+            right: -30px;
+        }
+
+        .intelligence-carousel .slick-arrow:before {
+            font-size: 24px;
+            color: white;
+            opacity: 1;
+        }
+
+        .intelligence-carousel .slick-arrow:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Testimonial carousel styling */
+        .testimonial-carousel .slick-slide {
+            opacity: 0.5;
+            transform: scale(0.9);
+            transition: all 0.5s ease;
+            transform-origin: center center; /* Ensure scaling happens from the center */
+            pointer-events: none; /* Disable interaction with non-active slides */
+            visibility: visible !important; /* Make all slides visible */
+        }
+
+        .testimonial-carousel .slick-center {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto; /* Enable interaction with active slide */
+            visibility: visible !important; /* Show active slide */
+        }
+
+        .testimonial-carousel .feature-card {
+            background: rgba(30, 30, 30, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+            transform: translateZ(0); /* Force hardware acceleration */
+            display: block !important; /* Ensure cards are displayed */
+            visibility: visible !important; /* Ensure cards are visible */
+        }
+
+        /* Custom dots for both carousels */
+        .slick-dots {
+            bottom: -30px;
+        }
+
+        .slick-dots li button:before {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            opacity: 1;
+        }
+
+        .slick-dots li.slick-active button:before {
+            color: white;
+            opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .slick-prev {
+                left: 10px;
+            }
+            
+            .slick-next {
+                right: 10px;
+            }
+        }
+
+        /* Fix for carousel overflow issues */
+        .testimonial-carousel .slick-list, .intelligence-carousel .slick-list {
+            overflow: hidden !important; /* Override the visible setting to hide overflow */
+            margin: 0 -20px; /* Compensate for slide padding */
+        }
+
+        .testimonial-carousel .slick-track, .intelligence-carousel .slick-track {
+            padding: 20px 0; /* Add padding to prevent top overflow */
+            display: flex !important;
+            align-items: center;
+        }
+
+        /* Fix footer overflow */
+        footer {
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            margin-top: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            clear: both;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            /* Adding padding to maintain proper spacing */
+            padding-bottom: 0;
+        }
+
+        /* Improved mobile responsiveness */
+        @media (max-width: 768px) {
+            .feature-card {
+                padding: 1.25rem;
+            }
+            
+            .process-step {
+                margin-bottom: 2rem;
+            }
+            
+            .footer {
+                padding-bottom: 1rem;
+            }
+            
+            .footer .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .footer .grid {
+                gap: 1.5rem;
+            }
+            
+            /* Fix for the "crafted with" line */
+            .footer .mt-12 {
+                margin-top: 2rem;
+                padding-top: 1rem;
+                padding-bottom: 0;
+            }
+            
+            /* Ensure mobile menu items are properly spaced and visible */
+            #mobile-menu .flex {
+                padding: 2rem 1rem;
+            }
+            
+            #mobile-menu a {
+                font-size: 1.25rem;
+                padding: 0.5rem 0;
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+            
+            #mobile-menu button.primary-button {
+                width: 80%;
+                max-width: 250px;
+            }
+        }
+        
+        /* Main content wrapper */
+        .main-content {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        /* Ensure hero section is always visible when it should be */
+        #hero {
+            display: block !important; /* Changed from flex to block */
+            visibility: visible !important;
+            opacity: 1 !important;
+            height: auto !important; /* Use auto height instead of min-height */
+            min-height: 100vh !important;
+            position: relative !important;
+            z-index: 1 !important;
+        }
+        
+        /* Ensure hero section content is visible */
+        #hero .hero-content {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: relative !important;
+            margin-top: 0 !important; /* Ensure no unexpected margins */
+        }
+        
+        /* Ensure proper vertical centering of hero section */
+        #hero {
+            display: flex !important; /* Changed back to flex for better centering */
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            padding-top: 0 !important; /* Remove padding-top and let flex centering handle it */
+            padding-bottom: 0 !important;
+            min-height: 100vh !important;
+        }
+        
+        /* Fix for navigation issues */
+        html {
+            scroll-behavior: smooth;
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
+        body {
+            min-height: 100%;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Scroll to top button */
+        #scroll-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 100;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+        
+        #scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        #scroll-to-top:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navigation - exactly matching reference site -->
+    <header class="fixed top-0 left-0 right-0 z-50 py-5">
+        <div class="container mx-auto px-6">
+            <nav class="flex items-center justify-between">
+                <a href="#hero" class="flex items-center">
+                    <img src="/logo.svg" alt="Swansight" class="h-8">
+                </a>
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-button" class="md:hidden z-50 text-white p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+                
+                <!-- Mobile menu -->
+                <div id="mobile-menu" class="fixed inset-0 bg-deepBlack bg-opacity-95 backdrop-blur-lg md:hidden z-40">
+                    <div class="flex flex-col items-center justify-center h-full space-y-8 relative">
+                        <button id="mobile-menu-close" class="absolute top-5 right-5 text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                        <a href="#hero" class="mobile-menu-item">Home</a>
+                        <a href="#use-cases" class="mobile-menu-item">Use Cases</a>
+                        <a href="#process" class="mobile-menu-item">Process</a>
+                        <a href="#testimonials" class="mobile-menu-item">Testimonials</a>
+                        <button class="primary-button mt-4">Schedule Call</button>
+                    </div>
+                </div>
+                
+                <!-- Desktop menu -->
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#use-cases" class="nav-link text-gray-300 hover:text-white">Use Cases</a>
+                    <a href="#process" class="nav-link text-gray-300 hover:text-white">Process</a>
+                    <a href="#testimonials" class="nav-link text-gray-300 hover:text-white">Testimonials</a>
+                </div>
+                
+                <button class="hidden md:block primary-button">
+                    Schedule Call
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content wrapper with floating shapes -->
+    <div class="main-content relative">
+        <!-- Floating background elements container positioned outside other content -->
+        <div id="floating-shapes"></div>
+        
+        <!-- Hero Section with enhanced translucent shapes and centered content -->
+        <section id="hero" class="relative min-h-screen">
+            <!-- Disco balls remain in hero section -->
+            <div id="disco-balls" class="absolute inset-0 overflow-hidden z-0"></div>
+            
+            <div class="container mx-auto px-6 z-10 text-center relative mt-20">
+                <div class="hero-content relative z-10">
+                    <!-- WebGL disco ball container positioned above "work" -->
+                    <div class="disco-glow-webgl"></div>
+                    <div id="disco-ball-container"></div>
+                    
+                    <h1 class="text-5xl md:text-7xl font-extrabold mb-6 mx-auto hero-heading">
+                        <span class="vibrant-text">Put AI to work for</span> <span>your</span>
+                        <div class="mt-2">
+                            <span id="typewriter" class="gradient-text"></span>
+                            <span class="typewriter-cursor"></span>
+                        </div>
+                    </h1>
+                    
+                    <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mb-10 mt-6 mx-auto">
+                    Ditch the dumb, pricy, siloed SaaS tools. <br>
+                    Bring AI + data + workflows to every corner of your customer journey with Swancity, the Agent OS for customer collaboration. 
+                </p>
+                
+                <button class="primary-button mt-4">
+                    Schedule Your Strategy Session
+                </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Proof with consistent spacing -->
+        <section class="py-12 bg-opacity-95 border-t border-white border-opacity-5">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-12">
+                    Trusted by organizations <span class="gradient-text">from 2 to 20,000 employees</span>
+                </h2>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-10 items-center">
+                    <!-- Company logos in grayscale with hover effect to show color -->
+                    <img src="/logos/amazon.svg" alt="Amazon" class="h-8 md:h-10 opacity-70 hover:opacity-100 transition-opacity" />
+                    <img src="/logos/shopify.svg" alt="Shopify" class="h-8 md:h-10 opacity-70 hover:opacity-100 transition-opacity" />
+                    <img src="/logos/microsoft.svg" alt="Microsoft" class="h-8 md:h-10 opacity-70 hover:opacity-100 transition-opacity" />
+                    <img src="/logos/adobe.svg" alt="Adobe" class="h-8 md:h-10 opacity-70 hover:opacity-100 transition-opacity" />
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases with cards matching reference site -->
+        <section id="use-cases" class="py-24 relative overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-16">
+                    Intelligence That <span class="gradient-text">Scales With You</span>
+                </h2>
+                
+                <div class="intelligence-carousel">
+                        <!-- Card 1 -->
+                    <div class="intelligence-slide">
+                        <div class="feature-card">
+                            <h3 class="text-neonPurple text-2xl font-semibold mb-4">
+                            Real-time Conversation Intelligence
+                        </h3>
+                        <p class="text-gray-400 mb-6">
+                            Whisper winning moves to your team during critical customer interactions
+                        </p>
+                            <div class="flex flex-col space-y-4">
+                            <div class="flex items-center">
+                                    <span class="text-neonPurple text-3xl font-bold count-up" data-target="22">22</span>
+                                <span class="text-gray-400 ml-2">% higher conversion rates</span>
+                            </div>
+                            <div class="flex items-center">
+                                    <span class="text-neonPurple text-3xl font-bold count-up" data-target="35">35</span>
+                                <span class="text-gray-400 ml-2">% faster rep onboarding</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                        <!-- Card 2 -->
+                    <div class="intelligence-slide">
+                        <div class="feature-card">
+                            <h3 class="text-comicBlue text-2xl font-semibold mb-4">
+                            AI-Powered Knowledge Management
+                        </h3>
+                        <p class="text-gray-400 mb-6">
+                            Transform scattered information into actionable knowledge that learns from every interaction
+                        </p>
+                            <div class="flex flex-col space-y-4">
+                            <div class="flex items-center">
+                                    <span class="text-comicBlue text-3xl font-bold count-up" data-target="68">68</span>
+                                <span class="text-gray-400 ml-2">% reduced time-to-answer</span>
+                            </div>
+                            <div class="flex items-center">
+                                    <span class="text-comicBlue text-3xl font-bold count-up" data-target="41">41</span>
+                                <span class="text-gray-400 ml-2">% higher satisfaction scores</span>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        
+                        <!-- Card 3 -->
+                    <div class="intelligence-slide">
+                        <div class="feature-card">
+                            <h3 class="text-brightGreen text-2xl font-semibold mb-4">
+                                Advanced Analytics
+                            </h3>
+                            <p class="text-gray-400 mb-6">
+                                Leverage powerful analytics to gain deep insights into customer behavior and optimize your business strategies
+                            </p>
+                            <div class="flex flex-col space-y-4">
+                                <div class="flex items-center">
+                                    <span class="text-brightGreen text-3xl font-bold count-up" data-target="53">53</span>
+                                    <span class="text-gray-400 ml-2">% better decision making</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-brightGreen text-3xl font-bold count-up" data-target="47">47</span>
+                                    <span class="text-gray-400 ml-2">% increased ROI</span>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Card 4 -->
+                    <div class="intelligence-slide">
+                        <div class="feature-card">
+                            <h3 class="text-softBlue text-2xl font-semibold mb-4">
+                                Smart Automation
+                            </h3>
+                            <p class="text-gray-400 mb-6">
+                                Automate repetitive tasks and workflows to improve efficiency and focus on what matters most
+                            </p>
+                            <div class="flex flex-col space-y-4">
+                                <div class="flex items-center">
+                                    <span class="text-softBlue text-3xl font-bold count-up" data-target="78">78</span>
+                                    <span class="text-gray-400 ml-2">% time saved on routine tasks</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <span class="text-softBlue text-3xl font-bold count-up" data-target="62">62</span>
+                                    <span class="text-gray-400 ml-2">% reduction in human error</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button class="primary-button">Get Started Today</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section with alternating sides -->
+        <section id="process" class="py-28 relative overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-20">
+                    The Path to <span class="gradient-text">Transformation</span>
+                </h2>
+                
+                <!-- Create a vertical path with numbered steps - alternating sides -->
+                <div class="process-timeline max-w-5xl mx-auto">
+                    <!-- Steps with alternating sides -->
+                    <!-- Step 1 - Right side (changed from left) -->
+                    <div class="process-step process-step-right fade-in-step" data-step="1">
+                        <div class="process-number bg-accent text-white">1</div>
+                        <div class="feature-card">
+                            <h3 class="text-violet-400 text-2xl font-semibold mb-2">Discovery</h3>
+                            <p class="text-gray-400">Streamlined workflow audit through one call or async discussion</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2 - Left side (changed from right) -->
+                    <div class="process-step process-step-left fade-in-step" data-step="2">
+                        <div class="process-number bg-accent text-white">2</div>
+                        <div class="feature-card">
+                            <h3 class="text-blue-400 text-2xl font-semibold mb-2">Integration</h3>
+                            <p class="text-gray-400">Data and workflow connection with your existing systems</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3 - Right side (changed from left) -->
+                    <div class="process-step process-step-right fade-in-step" data-step="3">
+                        <div class="process-number bg-accent text-white">3</div>
+                        <div class="feature-card">
+                            <h3 class="text-green-400 text-2xl font-semibold mb-2">Training</h3>
+                            <p class="text-gray-400">Swansight learns from your top performers' best practices</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4 - Left side (changed from right) -->
+                    <div class="process-step process-step-left fade-in-step" data-step="4">
+                        <div class="process-number bg-accent text-white">4</div>
+                        <div class="feature-card">
+                            <h3 class="text-violet-400 text-2xl font-semibold mb-2">Scale</h3>
+                            <p class="text-gray-400">Watch as your entire team performs at the level of your stars</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-20">
+                    <button class="primary-button">
+                        Schedule Your Strategy Session
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-24 relative overflow-hidden">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center mb-16">
+                    What Our <span class="gradient-text">Partners Say</span>
+                </h2>
+                
+                <div class="testimonial-carousel relative max-w-5xl mx-auto">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-slide">
+                        <div class="feature-card">
+                        <div class="flex items-start gap-4 mb-6">
+                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-neonPurple">
+                                    <img src="/testimonials/person1.jpg" alt="Jane Smith" class="w-full h-full object-cover" />
+                            </div>
+                            <div>
+                                <p class="text-white font-semibold text-lg">Jane Smith</p>
+                                <p class="text-gray-400 text-sm">Customer Success Director, Amazon</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-lg italic">
+                            "Swansight has transformed how our support teams interact with customers. The real-time intelligence gives us an edge we never had before."
+                        </p>
+                        </div>
+                    </div>
+                    
+                        <!-- Testimonial 2 -->
+                    <div class="testimonial-slide">
+                        <div class="feature-card">
+                        <div class="flex items-start gap-4 mb-6">
+                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-comicBlue">
+                                    <img src="/testimonials/person2.jpg" alt="Robert Johnson" class="w-full h-full object-cover" />
+                            </div>
+                            <div>
+                                <p class="text-white font-semibold text-lg">Robert Johnson</p>
+                                <p class="text-gray-400 text-sm">VP of Sales, Microsoft</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-lg italic">
+                            "The ability to capture our best performers' approaches and scale them across the team has been revolutionary for our sales organization."
+                        </p>
+                        </div>
+                    </div>
+                    
+                        <!-- Testimonial 3 -->
+                    <div class="testimonial-slide">
+                        <div class="feature-card">
+                        <div class="flex items-start gap-4 mb-6">
+                                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-brightGreen">
+                                    <img src="/testimonials/person3.jpg" alt="Emma Chen" class="w-full h-full object-cover" />
+                            </div>
+                            <div>
+                                <p class="text-white font-semibold text-lg">Emma Chen</p>
+                                <p class="text-gray-400 text-sm">CTO, Shopify</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-lg italic">
+                            "Implementation was smoother than expected, and the ROI was visible within weeks. Our team's productivity has increased dramatically."
+                        </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-8 border-t border-white border-opacity-5">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <img src="/logo.svg" alt="Swansight" class="h-10 mb-6">
+                        <p class="text-gray-400 mb-6 max-w-md">
+                            Swansight transforms customer-facing knowledge work through intelligent AI agents that learn from your team's best practices.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="mailto:hello@swansight.com" class="text-gray-400 hover:text-white transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </a>
+                            <a href="https://linkedin.com/company/swansight" class="text-gray-400 hover:text-white transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-white font-semibold mb-4">Navigation</h3>
+                            <ul class="space-y-2">
+                                <li><a href="#hero" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                                <li><a href="#use-cases" class="text-gray-400 hover:text-white transition-colors">Use Cases</a></li>
+                                <li><a href="#process" class="text-gray-400 hover:text-white transition-colors">Process</a></li>
+                                <li><a href="#testimonials" class="text-gray-400 hover:text-white transition-colors">Testimonials</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-white font-semibold mb-4">Contact</h3>
+                            <ul class="space-y-2">
+                                <li><a href="#hero" class="text-gray-400 hover:text-white transition-colors">Schedule Call</a></li>
+                                <li><a href="mailto:hello@swansight.com" class="text-gray-400 hover:text-white transition-colors">Email Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 pt-8 border-t border-white border-opacity-10 text-center text-gray-400 text-sm">
+                    <p>© 2025 Swansight. All rights reserved.</p>
+                    <p class="mt-2 mb-0 pb-0">Crafted with ♥ and ☕</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scroll to top button -->
+    <button id="scroll-to-top" aria-label="Scroll to top">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <!-- Scripts -->
+    <script>
+        // Create a true 3D disco ball with Three.js
+        function createWebGLDiscoBall() {
+            const container = document.getElementById('disco-ball-container');
+            if (!container) return;
+            
+            // Scene setup
+            const scene = new THREE.Scene();
+            
+            // Camera setup
+            const camera = new THREE.PerspectiveCamera(50, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.z = 250;
+            
+            // Renderer setup
+            const renderer = new THREE.WebGLRenderer({ 
+                alpha: true, 
+                antialias: true,
+                premultipliedAlpha: false // Ensures proper transparency
+            });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setClearColor(0x000000, 0); // Completely transparent background
+            container.appendChild(renderer.domElement);
+            
+            // Create a clear scene with transparent background
+            scene.background = null;
+            
+            // Lights setup
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+            scene.add(ambientLight);
+            
+            // Add multiple point lights for disco effect
+            const lights = [];
+            
+            // Main spotlight from top-right (stronger)
+            const spotLight = new THREE.SpotLight(0xffffff, 1.8);
+            spotLight.position.set(150, 200, 100);
+            spotLight.angle = Math.PI / 6;
+            spotLight.penumbra = 0.2;
+            spotLight.decay = 1;
+            spotLight.distance = 500;
+            scene.add(spotLight);
+            
+            // Colored lights for disco effect - more concentrated on top
+            const colors = [0xff1493, 0x8a2be2, 0x00bfff, 0xff4500, 0x7fffd4, 0xffd700];
+            
+            for (let i = 0; i < 8; i++) {
+                // More lights with higher intensity
+                const light = new THREE.PointLight(colors[i % colors.length], 0.7, 300);
+                
+                // Position more lights on the top half
+                const angle = (i / 8) * Math.PI * 2;
+                const distance = 150 + Math.random() * 50;
+                const height = 100 + Math.random() * 100; // Mostly above the center
+                
+                light.position.set(
+                    Math.sin(angle) * distance,
+                    height * (Math.random() > 0.3 ? 1 : -0.5), // 70% chance to be on top half
+                    Math.cos(angle) * distance
+                );
+                
+                scene.add(light);
+                lights.push(light);
+                
+                // Animate each light with faster movement
+                gsap.to(light.position, {
+                    x: Math.sin(angle + Math.PI) * distance,
+                    y: light.position.y * (Math.random() > 0.5 ? 1 : -1),
+                    z: Math.cos(angle + Math.PI) * distance,
+                    duration: 5 + Math.random() * 8,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
+                });
+                
+                // Animate light intensity for more dynamic flashing
+                gsap.to(light, {
+                    intensity: 0.2 + Math.random() * 0.8,
+                    duration: 0.5 + Math.random() * 2,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
+                });
+            }
+            
+            // Create disco ball with mirrored facets
+            const discoBall = new THREE.Group();
+            
+            // Create a shiny, reflective material for the mirror facets
+            const mirrorMaterial = new THREE.MeshPhongMaterial({
+                color: 0xffffff,
+                specular: 0xffffff,
+                shininess: 150, // More shiny
+                flatShading: true,
+                transparent: true,
+                opacity: 0.85 // Slightly translucent
+            });
+            
+            // Function to create a single disco ball facet - more square-shaped now
+            function createFacet(position, normal, width, height) {
+                // Create facet geometry - rectangular for authentic disco ball look
+                const facetGeo = new THREE.PlaneGeometry(width, height);
+                
+                // Make material more mirror-like
+                const facetMat = mirrorMaterial.clone();
+                
+                // Add more varied brightness based on position
+                const distFromTop = Math.abs(position.y - 70) / 140; // 0 at top, 1 at bottom
+                
+                // Make facets on top half brighter
+                if (position.y > 0) {
+                    facetMat.emissive = new THREE.Color(0xffffff);
+                    facetMat.emissiveIntensity = 0.15 * (1 - distFromTop);
+                }
+                
+                // Add a very slight random tint to some facets for realism
+                if (Math.random() > 0.6) {
+                    const randomColor = new THREE.Color(colors[Math.floor(Math.random() * colors.length)]);
+                    randomColor.lerp(new THREE.Color(0xffffff), 0.85);
+                    facetMat.color = randomColor;
+                }
+                
+                const facet = new THREE.Mesh(facetGeo, facetMat);
+                
+                // Position at the given position
+                facet.position.copy(position);
+                
+                // Orient to face outward from center
+                facet.lookAt(position.clone().add(normal));
+                
+                // Add some randomness to the orientation for realism
+                facet.rotation.z += (Math.random() - 0.5) * 0.1;
+                
+                return facet;
+            }
+            
+            // Create a basic sphere to generate our facet positions
+            const radius = 90; // Increased radius by ~25%
+            const segments = 24; // More segments for better detail with larger ball
+            
+            // Manually create facets in a spherical pattern - more concentrated at top
+            for (let lat = 0; lat < segments; lat++) {
+                const theta1 = (lat / segments) * Math.PI;
+                const theta2 = ((lat + 1) / segments) * Math.PI;
+                
+                // Calculate density - more facets at the top, fewer at bottom
+                const density = lat < segments / 2 ? 
+                    segments * 2 : // Full density for top half
+                    Math.max(8, Math.floor((segments * 2) * (1 - (lat / segments)))); // Decreasing density for bottom but keep more facets
+                
+                for (let lon = 0; lon < density; lon++) {
+                    const phi1 = (lon / density) * Math.PI * 2;
+                    const phi2 = ((lon + 1) / density) * Math.PI * 2;
+                    
+                    // Calculate the center position of this facet
+                    const x = radius * Math.sin(theta1 + (theta2 - theta1) / 2) * Math.cos(phi1 + (phi2 - phi1) / 2);
+                    const y = radius * Math.cos(theta1 + (theta2 - theta1) / 2);
+                    const z = radius * Math.sin(theta1 + (theta2 - theta1) / 2) * Math.sin(phi1 + (phi2 - phi1) / 2);
+                    
+                    const position = new THREE.Vector3(x, y, z);
+                    const normal = position.clone().normalize();
+                    
+                    // Vary facet size based on position
+                    const latitudeFactor = Math.sin(theta1 + (theta2 - theta1) / 2);
+                    
+                    // Make facets on top half slightly larger for visibility
+                    const topMultiplier = position.y > 0 ? 1.2 : 1.0;
+                    
+                    // Make facets more rectangular (like real disco balls)
+                    const width = (7 + 6 * latitudeFactor) * topMultiplier;
+                    const height = (7 + 6 * latitudeFactor) * topMultiplier * (Math.random() * 0.3 + 0.85);
+                    
+                    // Create and add the facet
+                    const facet = createFacet(position, normal, width, height);
+                    discoBall.add(facet);
+                }
+            }
+            
+            // Add floating glitter/reflection points concentrated on top half
+            for (let i = 0; i < 60; i++) { // More glitter points for larger ball
+                const glitterGeo = new THREE.CircleGeometry(1.2 + Math.random() * 2.5, 6);
+                const glitterMat = new THREE.MeshBasicMaterial({
+                    color: 0xffffff,
+                    transparent: true,
+                    opacity: 0.6 + Math.random() * 0.4,
+                    side: THREE.DoubleSide // Visible from both sides
+                });
+                
+                const glitter = new THREE.Mesh(glitterGeo, glitterMat);
+                
+                // Position mostly on the top half and visible portion
+                const theta = Math.random() * Math.PI * (Math.random() > 0.7 ? 1 : 0.5); // 70% on top half
+                const phi = Math.random() * Math.PI * 2;
+                
+                const glitterRadius = radius + 1; // Slightly outside the ball
+                glitter.position.set(
+                    glitterRadius * Math.sin(theta) * Math.cos(phi),
+                    glitterRadius * Math.cos(theta),
+                    glitterRadius * Math.sin(theta) * Math.sin(phi)
+                );
+                
+                // Make glitter face the camera
+                glitter.lookAt(camera.position);
+                
+                // Animate glitter opacity for twinkling effect
+                gsap.to(glitterMat, {
+                    opacity: 0.1 + Math.random() * 0.2,
+                    duration: 0.2 + Math.random() * 0.8,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut",
+                    delay: Math.random() * 2
+                });
+                
+                discoBall.add(glitter);
+            }
+            
+            // Earth-like tilt
+            discoBall.rotation.x = Math.PI * 0.13; // ~23 degrees, like Earth
+            
+            scene.add(discoBall);
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Rotate the disco ball (slightly slower)
+                discoBall.rotation.y += 0.002;
+                
+                // Make sure glitter always faces camera
+                discoBall.children.forEach(child => {
+                    if (child.geometry && child.geometry.type === 'CircleGeometry') {
+                        child.lookAt(camera.position);
+                    }
+                });
+                
+                // Render the scene
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            });
+            
+            return { scene, discoBall, renderer, camera };
+        }
+        
+        // Create floating shapes and disco balls dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the WebGL disco ball
+            createWebGLDiscoBall();
+            
+            const shapesContainer = document.getElementById('floating-shapes');
+            const discoBallsContainer = document.getElementById('disco-balls');
+            
+            // Create floating shapes
+            const shapeCount = 42; // Increased for better coverage throughout the page
+
+            // Define the geometric shape types - ONLY rounded shapes and Tetris blocks
+            const shapeTypes = [
+                'rounded-square', 'circle', 'plus', 
+                'tetris-l', 'tetris-t', 'tetris-s', 'tetris-z'
+            ];
+
+            // Define specific shape distributions to ensure variety
+            const shapeDistribution = [
+                { type: 'rounded-square', weight: 30 },
+                { type: 'circle', weight: 30 },
+                { type: 'plus', weight: 10 },
+                { type: 'tetris-l', weight: 8 },
+                { type: 'tetris-t', weight: 8 },
+                { type: 'tetris-s', weight: 7 },
+                { type: 'tetris-z', weight: 7 }
+            ];
+            
+            // Soft neon colors
+            const colorClasses = ['mint', 'cyan', 'purple', 'pink', 'blue', 'amber'];
+            
+            // Size classes with distribution weights - skewed toward medium
+            const sizeDistribution = [
+                { class: 'small', weight: 25 },
+                { class: 'medium', weight: 50 }, // Increased from 40 to favor medium shapes
+                { class: 'large', weight: 25 }
+            ];
+            
+            // Function to get a random item based on weights
+            function getWeightedRandom(items, weights) {
+                let i;
+                let sum = 0;
+                const random = Math.random() * weights.reduce((a, b) => a + b, 0);
+                
+                for (i = 0; i < weights.length; i++) {
+                    sum += weights[i];
+                    if (random < sum) return items[i];
+                }
+                
+                return items[items.length - 1];
+            }
+            
+            // Get all sections to distribute shapes based on section heights
+            const sections = document.querySelectorAll('section');
+            const sectionPositions = [];
+            
+            // Calculate section positions and heights
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const sectionHeight = rect.height;
+                const sectionTop = section.offsetTop;
+                
+                // Check if this is the hero section (first section with hero-content)
+                const isHero = section.id === '' && section.querySelector('.hero-content');
+                
+                // Check if this is the "Trusted by" section (social proof section)
+                const isSocialProof = section.classList.contains('py-16') && 
+                                      section.querySelector('.text-center.text-gray-400.text-lg');
+                
+                // Allocate shapes based on section height (more height = more shapes)
+                let shapesForSection = Math.max(3, Math.floor((sectionHeight / document.body.scrollHeight) * shapeCount));
+                
+                // Add more shapes to hero section, but with a more balanced approach
+                if (isHero) {
+                    shapesForSection += 5; // Add 5 more shapes to hero section
+                }
+                if (section.id === 'testimonials') {
+                    shapesForSection += 2; // Add 2 more shapes to testimonial section
+                }
+                
+                // Add at least 1 shape to each section to ensure more even distribution
+                if (shapesForSection < 2 && section.id !== '') {
+                    shapesForSection = 2;
+                }
+                
+                sectionPositions.push({
+                    top: sectionTop,
+                    height: sectionHeight,
+                    shapeCount: shapesForSection,
+                    isHero: isHero,
+                    isSocialProof: isSocialProof
+                });
+            });
+            
+            // Track occupied positions to prevent collisions
+            const occupiedPositions = [];
+            const minDistance = 200; // Increased to ensure shapes don't collide
+            
+            // Function to check if a position is too close to existing shapes
+            function isTooClose(x, y, size) {
+                for (const pos of occupiedPositions) {
+                    const distance = Math.sqrt(Math.pow(x - pos.x, 2) + Math.pow(y - pos.y, 2));
+                    // Use full size plus buffer for collision detection
+                    // Add extra buffer to ensure shapes never overlap
+                    if (distance < minDistance + size + pos.size + 20) { // Added 20px extra buffer
+                        return true;
+                    }
+                }
+                return false;
+            }
+            
+            // Function to get a valid position within a section that doesn't collide
+            function getValidPosition(sectionTop, sectionHeight, shapeSize, isHero = false) {
+                let x, y;
+                let attempts = 0;
+                const maxAttempts = 100; // Increased from 50 to try harder to find non-colliding positions
+                
+                // Use the same minimum distance for all sections to ensure consistent spacing
+                const sectionMinDistance = 200; // Increased to ensure shapes don't collide
+                
+                // Get footer position to avoid placing shapes below it
+                const footer = document.querySelector('footer');
+                const footerTop = footer ? footer.offsetTop : document.body.scrollHeight;
+                
+                do {
+                    // Improve horizontal spacing by using a grid-like approach
+                    // For hero section, use a slightly different distribution strategy
+                    if (isHero) {
+                        // For hero, use a more balanced distribution with better horizontal spacing
+                        // Divide viewport into 6 columns for hero section
+                        const column = Math.floor(Math.random() * 6); // 0-5
+                        x = 5 + (column * 16) + (Math.random() * 8); // Better horizontal distribution
+                        
+                        // More even vertical distribution in the hero section
+                        y = sectionTop + (Math.random() * sectionHeight);
+                    } else {
+                        // For other sections, use the same grid approach
+                        const column = Math.floor(Math.random() * 5); // 0-4
+                        x = 10 + (column * 20) + (Math.random() * 10); // 10-90% with better distribution
+                        y = sectionTop + Math.random() * (sectionHeight - shapeSize);
+                    }
+                    
+                    // Ensure shapes don't appear below the footer
+                    if (y + shapeSize > footerTop - 100) {
+                        y = Math.max(sectionTop, footerTop - 100 - shapeSize);
+                    }
+                    
+                    attempts++;
+                    
+                    // Check if position is too close to existing shapes
+                    let tooClose = false;
+                    for (const pos of occupiedPositions) {
+                        const distance = Math.sqrt(Math.pow(x - pos.x, 2) + Math.pow(y - pos.y, 2));
+                        // Add extra buffer to ensure shapes never overlap
+                        if (distance < sectionMinDistance + shapeSize + pos.size + 20) { // Added 20px extra buffer
+                            tooClose = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!tooClose) break;
+                    
+                } while (attempts < maxAttempts);
+                
+                // If we couldn't find a non-colliding position after max attempts,
+                // try a completely different approach - place it in a less populated area
+                if (attempts >= maxAttempts) {
+                    // Find the least populated horizontal area
+                    const horizontalDensity = [0, 0, 0, 0, 0]; // 5 horizontal sections for all
+                    
+                    for (const pos of occupiedPositions) {
+                        const section = Math.floor(pos.x / 20);
+                        if (section >= 0 && section < 5) {
+                            horizontalDensity[section]++;
+                        }
+                    }
+                    
+                    // Find the least populated section
+                    let minDensitySection = 0;
+                    for (let i = 1; i < 5; i++) {
+                        if (horizontalDensity[i] < horizontalDensity[minDensitySection]) {
+                            minDensitySection = i;
+                        }
+                    }
+                    
+                    // Place in the least populated section with additional vertical spacing
+                    x = 10 + (minDensitySection * 20) + (Math.random() * 10);
+                    
+                    // Try different vertical positions until we find one that doesn't collide
+                    let validPosition = false;
+                    for (let verticalAttempt = 0; verticalAttempt < 10; verticalAttempt++) {
+                        y = sectionTop + (verticalAttempt * (sectionHeight / 10)) + (Math.random() * (sectionHeight / 10));
+                        
+                        // Check if this position collides with any existing shape
+                        let collides = false;
+                        for (const pos of occupiedPositions) {
+                            const distance = Math.sqrt(Math.pow(x - pos.x, 2) + Math.pow(y - pos.y, 2));
+                            if (distance < sectionMinDistance + shapeSize + pos.size + 20) {
+                                collides = true;
+                                break;
+                            }
+                        }
+                        
+                        if (!collides) {
+                            validPosition = true;
+                            break;
+                        }
+                    }
+                    
+                    // If we still couldn't find a valid position, use a random position as last resort
+                    if (!validPosition) {
+                        y = sectionTop + Math.random() * (sectionHeight - shapeSize);
+                        console.log("Warning: Could not find non-colliding position after extensive attempts");
+                    }
+                }
+                
+                return { x, y };
+            }
+            
+            // Create a function to generate shapes with improved animations
+            function createShape(sectionInfo, index, isHeroSection = false) {
+                const shape = document.createElement('div');
+                shape.classList.add('floating-shape');
+                
+                // Choose shape type based on weighted distribution or force specific types for hero section
+                let shapeType;
+                
+                if (isHeroSection) {
+                    // For hero section, ensure only rounded corner squares, circles, plus signs, and Tetris blocks are used
+                    // Use a deterministic approach for the first few shapes to guarantee variety
+                    if (index < 6) {
+                        // Force specific shape types for the first 6 shapes in hero section
+                        const heroShapeTypes = ['rounded-square', 'circle', 'plus', 'tetris-l', 'tetris-t', 'tetris-s'];
+                        shapeType = heroShapeTypes[index % heroShapeTypes.length];
+                    } else {
+                        // For remaining shapes, use weighted distribution but only include specified shapes
+                        const heroShapeItems = ['rounded-square', 'circle', 'plus', 'tetris-l', 'tetris-t', 'tetris-s', 'tetris-z'];
+                        const heroShapeWeights = [30, 30, 10, 8, 8, 7, 7]; // Match the overall distribution
+                        
+                        // Get weighted random shape type
+                        const totalWeight = heroShapeWeights.reduce((sum, weight) => sum + weight, 0);
+                        let randomWeight = Math.random() * totalWeight;
+                        let cumulativeWeight = 0;
+                        
+                        for (let i = 0; i < heroShapeItems.length; i++) {
+                            cumulativeWeight += heroShapeWeights[i];
+                            if (randomWeight <= cumulativeWeight) {
+                                shapeType = heroShapeItems[i];
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    // For non-hero sections, use the original weighted distribution
+                const shapeItems = shapeDistribution.map(item => item.type);
+                const shapeWeights = shapeDistribution.map(item => item.weight);
+                    shapeType = getWeightedRandom(shapeItems, shapeWeights);
+                }
+                
+                shape.classList.add(shapeType);
+                
+                // Add random color class
+                const colorClass = colorClasses[Math.floor(Math.random() * colorClasses.length)];
+                shape.classList.add(colorClass);
+                
+                // Add size class based on weighted distribution
+                // For hero section, use different weights to favor medium and small shapes
+                let sizeItems = sizeDistribution.map(item => item.class);
+                let sizeWeights;
+                
+                if (isHeroSection) {
+                    // Hero section gets more medium and small shapes
+                    sizeWeights = [40, 50, 10]; // small, medium, large - favor medium and small
+                } else {
+                    // Other sections get a more balanced distribution
+                    sizeWeights = [33, 34, 33]; // small, medium, large - even distribution
+                }
+                
+                const sizeClass = getWeightedRandom(sizeItems, sizeWeights);
+                shape.classList.add(sizeClass);
+                
+                // Determine shape size based on class
+                let shapeSize = 70; // Default size (medium)
+                if (sizeClass === 'small') shapeSize = 40;
+                if (sizeClass === 'medium') shapeSize = 70;
+                if (sizeClass === 'large') shapeSize = 130;
+                
+                // Get a valid position that doesn't collide with other shapes
+                const position = getValidPosition(sectionInfo.top, sectionInfo.height, shapeSize, isHeroSection);
+                
+                // Set position
+                shape.style.left = `${position.x}%`;
+                shape.style.top = `${position.y}px`;
+                
+                // Track this position to prevent future collisions
+                occupiedPositions.push({
+                    x: position.x,
+                    y: position.y,
+                    size: shapeSize
+                });
+                
+                // Set explicit z-index for proper layering
+                shape.style.zIndex = Math.floor(Math.random() * 3);
+                
+                // Ensure all shapes have rounded corners (min 8px)
+                shape.style.borderRadius = shapeType === 'circle' ? '50%' : Math.max(8, parseInt(getComputedStyle(shape).borderRadius)) + 'px';
+                
+                // Add to container immediately
+                shapesContainer.appendChild(shape);
+                
+                // Apply DIRECT floating animation immediately with more pronounced movement
+                const floatX = 80 + Math.random() * 100; // 80-180px (increased range)
+                const floatY = 80 + Math.random() * 100; // 80-180px (increased range)
+                const floatRotation = Math.random() * 60; // 0-60 degrees (increased rotation)
+                const duration = 6 + Math.random() * 6; // 6-12 seconds (faster animation)
+
+                // Random direction vectors
+                const directionX = Math.random() > 0.5 ? 1 : -1;
+                const directionY = Math.random() > 0.5 ? 1 : -1;
+
+                // Create a single, reliable animation that starts immediately
+                gsap.to(shape, {
+                    x: `+=${directionX * floatX}px`,
+                    y: `+=${directionY * floatY}px`,
+                    rotation: (Math.random() > 0.5 ? 1 : -1) * floatRotation,
+                    duration: duration,
+                    ease: "sine.inOut",
+                    repeat: -1,
+                    yoyo: true,
+                    delay: 0, // Start immediately
+                    immediateRender: true, // Force immediate rendering
+                    onRepeat: function() {
+                        // Change direction randomly on repeat to simulate bouncing
+                        this.vars.x = `+=${(Math.random() > 0.5 ? 1 : -1) * floatX}px`;
+                        this.vars.y = `+=${(Math.random() > 0.5 ? 1 : -1) * floatY}px`;
+                    }
+                });
+                
+                return shape;
+            }
+            
+            // Generate shapes distributed across sections
+            let shapesCreated = 0;
+            
+            // First pass: Allocate more shapes to the hero section
+            sectionPositions.forEach((sectionInfo, index) => {
+                // Hero section gets significantly more shapes
+                let shapesToCreate;
+                
+                if (index === 0) { // Hero section
+                    // Allocate 30-35% of all shapes to hero section
+                    shapesToCreate = Math.floor(shapeCount * 0.35);
+                } else {
+                    // Other sections share the remaining shapes more evenly
+                    const remainingShapes = shapeCount - Math.floor(shapeCount * 0.35);
+                    const remainingSections = sectionPositions.length - 1;
+                    shapesToCreate = Math.floor(remainingShapes / remainingSections);
+                    
+                    // Ensure at least 2 shapes per non-hero section
+                    shapesToCreate = Math.max(2, shapesToCreate);
+                }
+                
+                // Limit to remaining available shapes
+                shapesToCreate = Math.min(shapesToCreate, shapeCount - shapesCreated);
+                
+                // Check if this is the hero section
+                const isHeroSection = index === 0;
+                
+                for (let i = 0; i < shapesToCreate; i++) {
+                    createShape(sectionInfo, i, isHeroSection);
+                    shapesCreated++;
+                }
+            });
+            
+            // Second pass: Distribute remaining shapes with more weight to middle sections
+            // This helps ensure shapes appear throughout the page, not just at top and bottom
+            if (shapesCreated < shapeCount) {
+                // Create weighted distribution for sections
+                // Give more weight to middle sections to ensure shapes appear there
+                const sectionWeights = sectionPositions.map((section, idx) => {
+                    // Middle sections get more weight, first and last get less
+                    const positionFactor = 1 - (Math.abs(idx - sectionPositions.length/2) / (sectionPositions.length/2));
+                    return 0.5 + (positionFactor * 0.5); // weights between 0.5 and 1
+                });
+                
+                while (shapesCreated < shapeCount) {
+                    // Select section based on weights
+                    const totalWeight = sectionWeights.reduce((sum, w) => sum + w, 0);
+                    let random = Math.random() * totalWeight;
+                    let cumulativeWeight = 0;
+                    let selectedIndex = 0;
+                    
+                    for (let i = 0; i < sectionWeights.length; i++) {
+                        cumulativeWeight += sectionWeights[i];
+                        if (random <= cumulativeWeight) {
+                            selectedIndex = i;
+                            break;
+                        }
+                    }
+                    
+                    createShape(sectionPositions[selectedIndex], shapesCreated, selectedIndex === 0);
+                    shapesCreated++;
+                }
+            }
+            
+            // Mark page as loaded to ensure animations run smoothly
+            document.body.classList.add('page-loaded');
+            document.body.classList.add('animations-enabled');
+            
+            // Improve scroll performance
+            window.addEventListener('scroll', function() {
+                // Apply will-change to shapes during scroll for better performance
+                if (!document.body.classList.contains('is-scrolling')) {
+                    document.body.classList.add('is-scrolling');
+                    // Only apply will-change during scroll
+                    document.querySelectorAll('.floating-shape').forEach(shape => {
+                        shape.style.willChange = 'transform';
+                    });
+                }
+                    
+                // Reset optimizations after scroll stops
+                clearTimeout(window.scrollEndTimer);
+                window.scrollEndTimer = setTimeout(() => {
+                    document.body.classList.remove('is-scrolling');
+                    // Reset will-change to auto when not scrolling
+                    document.querySelectorAll('.floating-shape').forEach(shape => {
+                        shape.style.willChange = 'auto';
+                    });
+                }, 200);
+            });
+        });
+        
+        // Implement character-by-character typewriter effect
+        const typewriterElement = document.getElementById('typewriter');
+        const words = ["People", "Customers", "Employees"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100; // ms per character
+
+        function typeEffect() {
+            if (!typewriterElement) return;
+            
+            const currentWord = words[wordIndex];
+            const currentText = currentWord.substring(0, charIndex);
+            
+            typewriterElement.textContent = currentText;
+            
+            // Add blinking cursor effect
+            const cursor = document.querySelector('.typewriter-cursor');
+            if (cursor) {
+                cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+            }
+            
+            // Typing logic
+            if (!isDeleting) {
+                // Typing forward
+                if (charIndex < currentWord.length) {
+                    charIndex++;
+                    setTimeout(typeEffect, typingSpeed);
+                } else {
+                    // Pause at end of word
+                    isDeleting = true;
+                    setTimeout(typeEffect, 1500);
+                }
+            } else {
+                // Deleting
+                if (charIndex > 0) {
+                    charIndex--;
+                    setTimeout(typeEffect, typingSpeed / 2);
+                } else {
+                    // Move to next word
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                    setTimeout(typeEffect, 500);
+                }
+            }
+        }
+
+        // Start the typewriter effect
+        document.addEventListener('DOMContentLoaded', typeEffect);
+        
+        // Count up animation - immediate display
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.count-up').forEach(element => {
+                const target = parseInt(element.dataset.target || 0);
+                element.innerText = target;
+            });
+        });
+        
+        // Initialize carousels
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize testimonial carousel
+            $('.testimonial-carousel').slick({
+                centerMode: true,
+                centerPadding: '0',
+                slidesToShow: 1,
+                arrows: true,
+                dots: true,
+                autoplay: true,
+                autoplaySpeed: 5000,
+                fade: false, // Changed from true to false to ensure cards are visible
+                cssEase: 'ease',
+                speed: 500
+            });
+            
+            // Initialize intelligence carousel
+            $('.intelligence-carousel').slick({
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                arrows: true,
+                dots: true,
+                autoplay: true,
+                autoplaySpeed: 4000,
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+            
+            // Fix for testimonial cards visibility
+            setTimeout(function() {
+                // Force redraw of testimonial cards
+                $('.testimonial-slide').css('display', 'block');
+                $('.testimonial-slide .feature-card').css({
+                    'display': 'block',
+                    'visibility': 'visible',
+                    'opacity': '1'
+                });
+                
+                // Refresh the carousel to ensure proper rendering
+                $('.testimonial-carousel').slick('refresh');
+            }, 500);
+        });
+        
+        // Simple, clean navigation handling
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all navigation links
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuClose = document.getElementById('mobile-menu-close');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const heroSection = document.getElementById('hero');
+            
+            // Make sure hero section is visible
+            if (heroSection) {
+                heroSection.style.display = 'block';
+                heroSection.style.visibility = 'visible';
+                heroSection.style.opacity = '1';
+            }
+            
+            // Toggle mobile menu
+            if (mobileMenuButton && mobileMenu && mobileMenuClose) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.add('open');
+                });
+                
+                mobileMenuClose.addEventListener('click', function() {
+                    mobileMenu.classList.remove('open');
+                });
+            }
+            
+            // Handle navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Close mobile menu if open
+                    if (mobileMenu && mobileMenu.classList.contains('open')) {
+                        mobileMenu.classList.remove('open');
+                    }
+                    
+                    const targetId = this.getAttribute('href');
+                    
+                    // If it's the hero section
+                    if (targetId === '#hero' || targetId === '#') {
+                        // Scroll to top
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        // For other sections
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            // Get the header height for offset
+                            const headerHeight = document.querySelector('header').offsetHeight;
+                            
+                            // Calculate position
+                            const elementPosition = targetElement.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20; // Extra 20px padding
+                            
+                            // Scroll to the element with offset
+                            window.scrollTo({
+                                top: offsetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                    
+                    // Update URL
+                    history.pushState(null, null, targetId);
+                });
+            });
+            
+            // Handle scroll to top button
+            const scrollToTopBtn = document.getElementById('scroll-to-top');
+            if (scrollToTopBtn) {
+                // Show button when scrolling down
+                window.addEventListener('scroll', function() {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.classList.add('visible');
+                    } else {
+                        scrollToTopBtn.classList.remove('visible');
+                    }
+                });
+                
+                // Scroll to top when clicked
+                scrollToTopBtn.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

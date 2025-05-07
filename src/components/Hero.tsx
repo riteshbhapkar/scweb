@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'https://cdn.skypack.dev/three@0.136.0';
 // @ts-ignore - Skypack CDN module allows this import type
 import { GLTFLoader, GLTF } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
@@ -7,8 +7,6 @@ const Hero: React.FC = () => {
   // Refs for DOM elements and Three.js objects
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const shapesContainerRef = useRef<HTMLDivElement>(null); // Container for floating shapes
-  const shapesRef = useRef<HTMLDivElement[]>([]); // Array to hold shape elements
   const gltfSceneRef = useRef<THREE.Group | null>(null); // Ref to loaded GLTF scene for cleanup
   const animationFrameIdRef = useRef<number | null>(null); // Ref for the main Three.js animation frame
 
@@ -59,114 +57,7 @@ const Hero: React.FC = () => {
   };
   // --- End Form Handlers ---
 
-  // --- Function to create floating shapes (Keep as is) ---
-  const createFloatingShapes = useCallback(() => {
-      if (!shapesContainerRef.current) {
-          console.warn("Shapes container ref not available.");
-          return;
-      }
-      console.log("Creating floating Tetris shapes...");
-
-      // Cleanup existing shapes
-      shapesRef.current.forEach(shape => {
-          if (shape.dataset.animationId) cancelAnimationFrame(parseInt(shape.dataset.animationId));
-          if (shape.parentNode === shapesContainerRef.current) shapesContainerRef.current.removeChild(shape);
-      });
-      shapesRef.current = [];
-
-      // Shape types
-      const shapeTypes = [
-          'L-shape', 'T-shape', 'square', 'line', 'Z-shape', 'circle', 'plus'
-      ];
-      const sizes = ['small', 'medium', 'large'];
-      const colors = ['mint', 'cyan', 'purple', 'pink', 'blue', 'amber'];
-      const numShapes = Math.floor(Math.random() * 6) + 15; // 15-20 shapes
-      const containerWidth = shapesContainerRef.current.clientWidth;
-      const containerHeight = shapesContainerRef.current.clientHeight;
-
-      if (containerWidth === 0 || containerHeight === 0) console.warn("Shapes container has zero dimensions.");
-
-      const performance = window.performance;
-
-      // Grid system for distribution (optional)
-      const gridCols = 5; const gridRows = 4;
-      const cellWidth = containerWidth / gridCols;
-      const cellHeight = containerHeight / gridRows;
-      const occupiedCells = new Set();
-
-      for (let i = 0; i < numShapes; i++) {
-          const shape = document.createElement('div');
-          const shapeType = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
-          const sizeClass = sizes[Math.floor(Math.random() * sizes.length)];
-          const color = colors[Math.floor(Math.random() * colors.length)];
-          shape.className = `floating-shape ${shapeType} ${sizeClass} ${color}`;
-
-          let shapeDim = 70;
-          if (sizeClass === 'small') shapeDim = 40;
-          else if (sizeClass === 'large') shapeDim = 130;
-          if (shapeType === 'line') shapeDim *= 1.5;
-
-          // Animation Parameters
-          const maxAmplitude = 80;
-          const ampX = Math.random() * maxAmplitude + 20;
-          const ampY = Math.random() * maxAmplitude + 20;
-          const freqX = Math.random() * 0.15 + 0.05;
-          const freqY = Math.random() * 0.15 + 0.05;
-          const phaseX = Math.random() * Math.PI * 2;
-          const phaseY = Math.random() * Math.PI * 2;
-
-          // Position calculation (using grid)
-          let gridCol, gridRow, cellKey;
-          let attempts = 0; const maxAttempts = gridCols * gridRows;
-          do {
-              gridCol = Math.floor(Math.random() * gridCols);
-              gridRow = Math.floor(Math.random() * gridRows);
-              cellKey = `${gridCol}-${gridRow}`; attempts++;
-              if (attempts > maxAttempts) break;
-          } while (occupiedCells.has(cellKey));
-          occupiedCells.add(cellKey);
-          const cellX = gridCol * cellWidth; const cellY = gridRow * cellHeight;
-          const startX = cellX + (Math.random() * 0.6 + 0.2) * (cellWidth - shapeDim - 2 * ampX);
-          const startY = cellY + (Math.random() * 0.6 + 0.2) * (cellHeight - shapeDim - 2 * ampY);
-
-          const initialRotation = Math.random() * 360;
-          shape.style.left = `${Math.max(0, startX)}px`;
-          shape.style.top = `${Math.max(0, startY)}px`;
-          shape.style.transform = `rotate(${initialRotation}deg)`;
-
-          shapesContainerRef.current.appendChild(shape);
-          shapesRef.current.push(shape);
-
-          let currentRotation = initialRotation;
-          const startTime = performance.now();
-
-          // Animation Loop for each shape
-          const animateShape = (now: number) => {
-              if (!shape.parentNode) return;
-
-              const elapsedTime = (now - startTime) * 0.001;
-              const offsetX = Math.sin(elapsedTime * freqX + phaseX) * ampX;
-              const offsetY = Math.cos(elapsedTime * freqY + phaseY) * ampY;
-              const newLeft = startX + offsetX;
-              const newTop = startY + offsetY;
-
-              shape.style.left = `${newLeft}px`;
-              shape.style.top = `${newTop}px`;
-
-              currentRotation += (Math.random() * 1.0 - 0.5) * 0.4;
-              shape.style.transform = `rotate(${currentRotation}deg)`;
-
-              const animationId = requestAnimationFrame(animateShape);
-              shape.dataset.animationId = animationId.toString();
-          };
-          setTimeout(() => requestAnimationFrame(animateShape), Math.random() * 100);
-      }
-      console.log(`Created ${shapesRef.current.length} shapes.`);
-  }, []);
-  // --- End shape creation ---
-
-
-  // --- Main useEffect for Three.js & triggering shapes (Keep as is) ---
+  // --- Main useEffect for Three.js ---
   useEffect(() => {
     if (!containerRef.current || !canvasRef.current) return;
     console.log("Hero useEffect running.");
@@ -187,9 +78,10 @@ const Hero: React.FC = () => {
     window.addEventListener('resize', updateSize);
     updateSize();
     const discoBallGroup = new THREE.Group();
+    discoBallGroup.rotation.x = Math.PI / 6; // Tilt 30 degrees forward
+    discoBallGroup.rotation.z = 0; // Tilt slightly to the side
     scene.add(discoBallGroup);
     // --- End Three.js Setup ---
-
 
     // --- GLTF Loading ---
     const loader = new GLTFLoader();
@@ -204,32 +96,98 @@ const Hero: React.FC = () => {
       loader.load(path, (gltf: GLTF) => {
         if (!isMounted) return; console.log(`Model loaded successfully from ${path}`); modelLoaded = true; gltfSceneRef.current = gltf.scene;
         setTimeout(() => { if (isMounted) { setIsLoaded(true); setLoadingStatus(''); } }, 500);
-        gltf.scene.scale.set(0.5, 0.5, 0.5);
+        gltf.scene.scale.set(5, 5, 5);
         gltf.scene.traverse((child: any) => {
           if (child.isMesh) {
             if (child.material) { /* Material enhancements */ child.material.precision = 'highp'; if (child.material.metalness !== undefined) { child.material.roughness = Math.max(0.1, child.material.roughness || 0.5); child.material.envMapIntensity = 1.5; } if (child.material.map) { child.material.map.anisotropy = renderer.capabilities.getMaxAnisotropy(); child.material.map.minFilter = THREE.LinearFilter; child.material.map.magFilter = THREE.LinearFilter; } if (child.material.normalMap) { child.material.normalMap.anisotropy = renderer.capabilities.getMaxAnisotropy(); child.material.normalScale?.set(1.5, 1.5); } child.material.needsUpdate = true; }
             child.castShadow = true; child.receiveShadow = true; /* Shadows */
           }
         });
-        discoBallGroup.add(gltf.scene); gltf.scene.position.set(0, 0, 0);
+        discoBallGroup.add(gltf.scene); gltf.scene.position.set(0, 2.5, 0);
         if (gltf.animations && gltf.animations.length) { mixer = new THREE.AnimationMixer(gltf.scene); const action = mixer.clipAction(gltf.animations[0]); action.play(); console.log("Playing model animation."); } else { console.log("Model has no animations."); }
-        createFloatingShapes(); // Create shapes after model load
       }, (xhr) => { if (isMounted) setLoadingStatus(`Loading: ${Math.round(xhr.loaded / xhr.total * 100)}%`); }, (error) => { console.error(`Error loading model from ${path}:`, error); if (isMounted) tryLoadModel(pathIndex + 1); });
     };
     tryLoadModel();
     // --- End GLTF Loading ---
 
+    // --- Lights Setup ---
+    const pointLight1 = new THREE.PointLight(0xffffff, 0.5, 100); pointLight1.position.set(5, 5, 5); pointLight1.castShadow = true; pointLight1.shadow.mapSize.width = 1024; pointLight1.shadow.mapSize.height = 1024; pointLight1.shadow.bias = -0.001; scene.add(pointLight1);
+    const pointLight3 = new THREE.PointLight(0xffffff, 4, 100); pointLight3.position.set(0, 5, -5); pointLight3.castShadow = true; pointLight3.shadow.mapSize.width = 1024; pointLight3.shadow.mapSize.height = 1024; pointLight3.shadow.bias = -0.001; scene.add(pointLight3);
+    const topLeftLight = new THREE.PointLight(0xffffff, 1.5, 100); topLeftLight.position.set(-5, 8, 0); topLeftLight.castShadow = true; topLeftLight.shadow.mapSize.width = 1024; topLeftLight.shadow.mapSize.height = 1024; topLeftLight.shadow.bias = -0.001; scene.add(topLeftLight);
+    const blueAccent = new THREE.PointLight(0x4a6bff, 0.8, 50); blueAccent.position.set(3, 2, 3); scene.add(blueAccent);
+    const pinkAccent = new THREE.PointLight(0xff5ea2, 0.8, 50); pinkAccent.position.set(-3, -2, 3); scene.add(pinkAccent);
+    const cyanAccent = new THREE.PointLight(0x38eeff, 0.8, 50); cyanAccent.position.set(0, -3, 2); scene.add(cyanAccent);
+    const purpleAccent = new THREE.PointLight(0x8a2be2, 0.8, 50); purpleAccent.position.set(-2, 3, -2); scene.add(purpleAccent);
+    const topGreenAccent = new THREE.PointLight(0x00ff7f, 0.5, 30); topGreenAccent.position.set(2, 6, 1); scene.add(topGreenAccent);
+    const topYellowAccent = new THREE.PointLight(0xffd700, 0.5, 30); topYellowAccent.position.set(-2, 7, 0); scene.add(topYellowAccent);
+    const topRedAccent = new THREE.PointLight(0xff4500, 0.5, 30); topRedAccent.position.set(1, 6, -1); scene.add(topRedAccent);
+    const frontTopBlueAccent = new THREE.PointLight(0x1e90ff, 0.4, 25); frontTopBlueAccent.position.set(1, 5, 2); scene.add(frontTopBlueAccent);
+    const frontTopPurpleAccent = new THREE.PointLight(0x9370db, 0.4, 25); frontTopPurpleAccent.position.set(-1, 5, 2); scene.add(frontTopPurpleAccent);
+    const frontTopPinkAccent = new THREE.PointLight(0xff69b4, 0.4, 25); frontTopPinkAccent.position.set(0, 5, 2); scene.add(frontTopPinkAccent);
 
-    // --- Lights Setup (Keep as is) ---
-    const pointLight1 = new THREE.PointLight(0x4a6bff, 5, 100); pointLight1.position.set(5, 5, 5); pointLight1.castShadow = true; pointLight1.shadow.mapSize.width = 1024; pointLight1.shadow.mapSize.height = 1024; pointLight1.shadow.bias = -0.001; scene.add(pointLight1);
-    const pointLight2 = new THREE.PointLight(0xff5ea2, 5, 100); pointLight2.position.set(-5, -5, 5); pointLight2.castShadow = true; pointLight2.shadow.mapSize.width = 1024; pointLight2.shadow.mapSize.height = 1024; pointLight2.shadow.bias = -0.001; scene.add(pointLight2);
-    const pointLight3 = new THREE.PointLight(0x38eeff, 5, 100); pointLight3.position.set(0, 5, -5); pointLight3.castShadow = true; pointLight3.shadow.mapSize.width = 1024; pointLight3.shadow.mapSize.height = 1024; pointLight3.shadow.bias = -0.001; scene.add(pointLight3);
+    // Add blue spotlight
+    const blueSpotlight = new THREE.SpotLight(0x4a6bff, 2, 30, Math.PI / 6, 0.5, 1);
+    blueSpotlight.position.set(0, 5, 8);
+    blueSpotlight.target.position.set(0, 2.5, 0);
+    scene.add(blueSpotlight);
+    scene.add(blueSpotlight.target);
+
+    // Sparkle dots
+    const sparkleDots = [
+      { mesh: new THREE.Mesh(
+          new THREE.CircleGeometry(0.2, 32),
+          new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9 })
+        ),
+        position: new THREE.Vector3(1, 7, 0),
+        speed: 0.05,
+        scale: 1
+      },
+      { mesh: new THREE.Mesh(
+          new THREE.CircleGeometry(0.15, 32),
+          new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9 })
+        ),
+        position: new THREE.Vector3(-1, 7.2, 0),
+        speed: 0.07,
+        scale: 1
+      },
+      { mesh: new THREE.Mesh(
+          new THREE.CircleGeometry(0.25, 32),
+          new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9 })
+        ),
+        position: new THREE.Vector3(0, 7.1, 0.5),
+        speed: 0.06,
+        scale: 1
+      },
+      { mesh: new THREE.Mesh(
+          new THREE.CircleGeometry(0.18, 32),
+          new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9 })
+        ),
+        position: new THREE.Vector3(0.8, 7.3, -0.3),
+        speed: 0.08,
+        scale: 1
+      },
+      { mesh: new THREE.Mesh(
+          new THREE.CircleGeometry(0.12, 32),
+          new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9 })
+        ),
+        position: new THREE.Vector3(-0.7, 7.4, 0.2),
+        speed: 0.04,
+        scale: 1
+      }
+    ];
+
+    sparkleDots.forEach(({ mesh, position }) => {
+      mesh.position.copy(position);
+      mesh.rotation.x = -Math.PI / 2; // Make circles face up
+      mesh.renderOrder = 1; // Ensure dots render on top
+      discoBallGroup.add(mesh);
+    });
+
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); scene.add(ambientLight);
     camera.position.z = 10;
     // --- End Lights Setup ---
 
-
-    // --- Main Animation Loop (Three.js) (Keep as is) ---
+    // --- Main Animation Loop (Three.js) ---
     const animate = () => {
       if (!isMounted) return;
       animationFrameIdRef.current = requestAnimationFrame(animate);
@@ -237,45 +195,59 @@ const Hero: React.FC = () => {
       if (mixer) mixer.update(delta);
       if (modelLoaded) discoBallGroup.rotation.y += 0.003;
       if (modelLoaded && !mixer) discoBallGroup.rotation.x += 0.002;
+
+      // Animate sparkle dots
+      sparkleDots.forEach(({ mesh, speed, scale }) => {
+        const time = Date.now() * 0.001;
+        const pulse = 0.8 + Math.sin(time * speed * Math.PI) * 0.2;
+        mesh.scale.set(scale * pulse, scale * pulse, 1);
+        mesh.material.opacity = 0.7 + Math.sin(time * speed * Math.PI) * 0.3;
+      });
+
       renderer.render(scene, camera);
     };
     animate();
     // --- End Animation Loop ---
 
-
-    // --- Cleanup Function (Keep as is) ---
+    // --- Cleanup Function ---
     return () => {
       isMounted = false;
       console.log("Cleaning up Hero component...");
       window.removeEventListener('resize', updateSize);
       if (animationFrameIdRef.current) cancelAnimationFrame(animationFrameIdRef.current);
 
-      // Cleanup floating shapes
-      console.log(`Cleaning up ${shapesRef.current.length} floating shapes.`);
-       if (shapesContainerRef.current) { shapesRef.current.forEach(shape => { if (shape.dataset.animationId) cancelAnimationFrame(parseInt(shape.dataset.animationId)); if (shape.parentNode === shapesContainerRef.current) shapesContainerRef.current.removeChild(shape); }); } shapesRef.current = [];
-
       // Cleanup Three.js resources
       scene.remove(discoBallGroup);
-       if (gltfSceneRef.current) {
-           gltfSceneRef.current.traverse((child: any) => {
-               if (child.isMesh) {
-                   child.geometry?.dispose();
-                   if (child.material) {
-                       if (Array.isArray(child.material)) { child.material.forEach(mat => { Object.values(mat).forEach((value: any) => { if (value && typeof value.dispose === 'function' && value.isTexture) value.dispose(); }); mat.dispose(); }); }
-                       else { Object.values(child.material).forEach((value: any) => { if (value && typeof value.dispose === 'function' && value.isTexture) value.dispose(); }); child.material.dispose(); }
-                   }
-               }
-           });
-       }
+      if (gltfSceneRef.current) {
+        gltfSceneRef.current.traverse((child: any) => {
+          if (child.isMesh) {
+            child.geometry?.dispose();
+            if (child.material) {
+              if (Array.isArray(child.material)) {
+                child.material.forEach(mat => {
+                  Object.values(mat).forEach((value: any) => {
+                    if (value && typeof value.dispose === 'function' && value.isTexture) value.dispose();
+                  });
+                  mat.dispose();
+                });
+              } else {
+                Object.values(child.material).forEach((value: any) => {
+                  if (value && typeof value.dispose === 'function' && value.isTexture) value.dispose();
+                });
+                child.material.dispose();
+              }
+            }
+          }
+        });
+      }
       renderer.dispose();
       console.log("Three.js cleanup complete.");
     };
-  }, [createFloatingShapes]);
-  // --- End Main useEffect ---
+  }, []);
 
-  // --- JSX Return (Keep as is) ---
+  // --- JSX Return ---
   return (
-    <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center justify-center bg-gray-950">
+    <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center justify-center">
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
@@ -296,17 +268,11 @@ const Hero: React.FC = () => {
         </div>
       )}
 
-      {/* Shapes Container */}
-      <div ref={shapesContainerRef} className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none" aria-hidden="true"></div>
-
       {/* Three.js Canvas Container */}
       <div ref={containerRef} className="absolute top-0 left-0 w-full h-full z-5">
         <canvas ref={canvasRef} className="w-full h-full" aria-label="Disco ball animation background" />
         {loadingStatus && ( <div className="absolute top-4 left-4 bg-black/70 text-white p-2 rounded z-40" role="status">{loadingStatus}</div> )}
       </div>
-
-      {/* Overlay Gradient */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-gray-950/70 via-gray-900/50 to-gray-950/80 z-10 pointer-events-none" aria-hidden="true"></div>
 
       {/* Main Content */}
       <div className="container-custom relative z-30 pt-0 pb-16 text-center">
@@ -323,100 +289,6 @@ const Hero: React.FC = () => {
 
       {/* --- UPDATED CSS STYLES --- */}
       <style>{`
-        /* Base style for all floating shapes */
-        .floating-shape {
-          position: absolute;
-          z-index: 1;
-          opacity: 0;
-          pointer-events: none;
-          transform-origin: center;
-          border: 1px solid rgba(255, 255, 255, 0.35);
-          transition: opacity 0.5s ease-in-out;
-          backdrop-filter: blur(5px);
-          -webkit-backdrop-filter: blur(5px);
-          /* Base shadow - will be overridden by color class */
-          box-shadow: 0 0 25px rgba(150, 150, 255, 0.4);
-          will-change: transform, opacity, box-shadow; /* Add box-shadow to will-change */
-          transform: translate3d(0, 0, 0);
-          /* Apply fade-in and pulse-glow animations */
-          animation: pulse-glow 5s infinite ease-in-out, fadeInShape 1s ease forwards;
-          border-radius: 4px; /* Default */
-        }
-        /* Fade in animation */
-        @keyframes fadeInShape { to { opacity: 0.9; } }
-
-        /* Size variants */
-        .floating-shape.small { width: 40px; height: 40px; }
-        .floating-shape.medium { width: 70px; height: 70px; }
-        .floating-shape.large { width: 130px; height: 130px; }
-
-        /* Shape Type Styles */
-        .floating-shape.circle { border-radius: 50%; }
-        .floating-shape.plus { clip-path: polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%); border-radius: 4px; }
-        .floating-shape.square { border-radius: 6px; }
-        .floating-shape.line.small { width: 60px; height: 20px; }
-        .floating-shape.line.medium { width: 100px; height: 35px; }
-        .floating-shape.line.large { width: 180px; height: 60px; }
-        .floating-shape.line { border-radius: 4px; }
-        .floating-shape.L-shape { clip-path: polygon(0% 0%, 33.3% 0%, 33.3% 66.6%, 100% 66.6%, 100% 100%, 0% 100%); border-radius: 4px; }
-        .floating-shape.T-shape { clip-path: polygon(0% 0%, 100% 0%, 100% 33.3%, 66.6% 33.3%, 66.6% 100%, 33.3% 100%, 33.3% 33.3%, 0% 33.3%); border-radius: 4px; }
-        .floating-shape.Z-shape { clip-path: polygon(0% 0%, 100% 0%, 100% 33.3%, 66.6% 33.3%, 66.6% 66.6%, 100% 66.6%, 100% 100%, 0% 100%, 0% 66.6%, 33.3% 66.6%, 33.3% 33.3%, 0% 33.3%); border-radius: 4px; }
-
-        /* Neon Glow Effects - Pseudo-elements for enhancement */
-        /* Inner gradient/shadow */
-        .floating-shape::after {
-            content: ''; position: absolute; inset: 0;
-            border-radius: inherit; clip-path: inherit;
-            opacity: 0.95;
-            box-shadow: 0 0 15px rgba(220, 220, 255, 0.6) inset; /* Keep inner shadow */
-            /* Removed background gradient from here */
-        }
-        /* Outer subtle blur */
-        .floating-shape::before {
-            content: ''; position: absolute; inset: -2px;
-            border-radius: inherit; clip-path: inherit;
-            opacity: 0.6; /* Reduced opacity for subtlety */
-            z-index: -1;
-            filter: blur(4px); /* Slightly reduced blur */
-            /* Background color set by color class below */
-        }
-
-        /* --- Color Variants --- */
-        /* Apply main colored box-shadow here and background to ::before */
-        .floating-shape.mint { box-shadow: 0 0 25px rgba(19, 206, 102, 0.7); }
-        .floating-shape.mint::before { background: rgba(19, 206, 102, 0.5); }
-        .floating-shape.mint::after { background: linear-gradient(135deg, rgba(19, 206, 102, 0.4) 0%, rgba(19, 206, 102, 0.6) 100%); }
-
-        .floating-shape.cyan { box-shadow: 0 0 25px rgba(6, 182, 212, 0.7); }
-        .floating-shape.cyan::before { background: rgba(6, 182, 212, 0.5); }
-        .floating-shape.cyan::after { background: linear-gradient(135deg, rgba(6, 182, 212, 0.4) 0%, rgba(6, 182, 212, 0.6) 100%); }
-
-        .floating-shape.purple { box-shadow: 0 0 25px rgba(147, 51, 234, 0.7); }
-        .floating-shape.purple::before { background: rgba(147, 51, 234, 0.5); }
-        .floating-shape.purple::after { background: linear-gradient(135deg, rgba(147, 51, 234, 0.25) 0%, rgba(147, 51, 234, 0.45) 100%); }
-
-        .floating-shape.pink { box-shadow: 0 0 25px rgba(236, 72, 153, 0.7); }
-        .floating-shape.pink::before { background: rgba(236, 72, 153, 0.5); }
-        .floating-shape.pink::after { background: linear-gradient(135deg, rgba(236, 72, 153, 0.25) 0%, rgba(236, 72, 153, 0.45) 100%); }
-
-        .floating-shape.blue { box-shadow: 0 0 25px rgba(59, 130, 246, 0.7); }
-        .floating-shape.blue::before { background: rgba(59, 130, 246, 0.5); }
-        .floating-shape.blue::after { background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(59, 130, 246, 0.45) 100%); }
-
-        .floating-shape.amber { box-shadow: 0 0 25px rgba(245, 158, 11, 0.7); }
-        .floating-shape.amber::before { background: rgba(245, 158, 11, 0.5); }
-        .floating-shape.amber::after { background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(245, 158, 11, 0.45) 100%); }
-        /* --- End Color Variants --- */
-
-
-        /* Animations */
-        /* Pulse glow animation - Animates the box-shadow property */
-        /* NOTE: The color part of the shadow comes from the color classes */
-        @keyframes pulse-glow {
-          0% { box-shadow: 0 0 25px; } /* Size/blur defined here, color from class */
-          50% { box-shadow: 0 0 45px; } /* Size/blur defined here, color from class */
-          100% { box-shadow: 0 0 25px; } /* Size/blur defined here, color from class */
-        }
         /* Modal fade in animation */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fadeIn { animation: fadeIn 0.3s ease-out forwards; }
@@ -424,11 +296,9 @@ const Hero: React.FC = () => {
         /* Accessibility: Improve focus visibility */
         *:focus-visible { outline: 3px solid #6366F1; outline-offset: 2px; }
         .modal-input:focus { border-color: #8B5CF6; box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.5); }
-
       `}</style>
     </section>
   );
-  // --- End JSX Return ---
 };
 
 export default Hero;

@@ -7,6 +7,7 @@ import TrustedBy from './components/TrustedBy';
 import HowWeWork from './components/HowWeWork';
 import Cta from './components/Cta';
 import Footer from './components/Footer';
+import FloatingShapes from './components/FloatingShapes';
 import { useEffect } from 'react';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950 text-white">
+      <FloatingShapes />
       <Navbar />
       <div className="pt-24">
         <Hero />
