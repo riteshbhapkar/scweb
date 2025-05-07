@@ -138,7 +138,7 @@ const Hero: React.FC = () => {
     // --- GLTF Loading ---
     const loader = new GLTFLoader();
     setLoadingStatus('Loading model...');
-    const modelPaths = ['/disco_ball/scene.gltf'];
+    const modelPaths = ['/disco_ball/scene.gltf', 'disco_ball/scene.gltf', './disco_ball/scene.gltf', '../disco_ball/scene.gltf'];
     let modelLoaded = false;
     let mixer: THREE.AnimationMixer | null = null;
     const clock = new THREE.Clock();
@@ -336,9 +336,7 @@ const Hero: React.FC = () => {
            <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-gray-200"> Unify. Amplify. Grow. </h2>
            <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-gray-300"> AI-powered growth for pros—ditch the SaaS sprawl. </p>
            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-             <button onClick={() => setShowModal(true)} className="px-6 py-2.5 text-base font-medium text-white bg-gradient-to-r from-indigo-500 via-pink-500 to-purple-500 hover:from-indigo-600 hover:via-pink-600 hover:to-purple-600 rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 hover:scale-105 hover:brightness-110">
-               Book Your Demo
-             </button>
+             <button onClick={() => setShowModal(true)} className="btn-primary bg-gradient-to-r from-indigo-500 via-pink-500 hover:from-indigo-600 hover:via-purple-600"> Book Your Demo </button>
            </div>
          </div>
       </div>
