@@ -40,9 +40,9 @@ function App() {
       <Navbar />
       <div className="pt-24">
         <Hero />
+        <TrustedBy />
         <UseCases />
         <AdditionalCapabilities />
-        <TrustedBy />
         <HowWeWork />
         <Cta />
         <Footer />

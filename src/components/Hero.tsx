@@ -3,6 +3,49 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.136.0';
 // @ts-ignore - Skypack CDN module allows this import type
 import { GLTFLoader, GLTF } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
 
+const TypeWriter: React.FC = () => {
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [wordIndex, setWordIndex] = useState(0);
+  const [typingSpeed, setTypingSpeed] = useState(100);
+
+  const words = ['Income', 'Growth', 'Code'];
+  const colors = ['#00FFFF', '#FF00FF', '#00FF00']; // Cyan, Magenta, Neon Green
+
+  useEffect(() => {
+    const currentWord = words[wordIndex];
+    
+    const handleTyping = () => {
+      if (!isDeleting && text === currentWord) {
+        // Pause at end of word
+        setTimeout(() => setIsDeleting(true), 1500);
+        return;
+      }
+
+      if (isDeleting && text === '') {
+        setIsDeleting(false);
+        setWordIndex((prev) => (prev + 1) % words.length);
+        setTypingSpeed(100);
+        return;
+      }
+
+      const delta = isDeleting ? -1 : 1;
+      setText(currentWord.substring(0, text.length + delta));
+      setTypingSpeed(isDeleting ? 50 : 100);
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, wordIndex, typingSpeed]);
+
+  return (
+    <div className="mt-2">
+      <span style={{ color: colors[wordIndex] }} className="drop-shadow-[0_0_15px_rgba(178,75,243,0.5)] [text-shadow:_0_0_20px_rgba(178,75,243,0.7)]">{text}</span>
+      <span className="typewriter-cursor"></span>
+    </div>
+  );
+};
+
 const Hero: React.FC = () => {
   // Refs for DOM elements and Three.js objects
   const containerRef = useRef<HTMLDivElement>(null);
@@ -103,7 +146,7 @@ const Hero: React.FC = () => {
             child.castShadow = true; child.receiveShadow = true; /* Shadows */
           }
         });
-        discoBallGroup.add(gltf.scene); gltf.scene.position.set(0, 2.5, 0);
+        discoBallGroup.add(gltf.scene); gltf.scene.position.set(0, 2.9, 0);
         if (gltf.animations && gltf.animations.length) { mixer = new THREE.AnimationMixer(gltf.scene); const action = mixer.clipAction(gltf.animations[0]); action.play(); console.log("Playing model animation."); } else { console.log("Model has no animations."); }
       }, (xhr) => { if (isMounted) setLoadingStatus(`Loading: ${Math.round(xhr.loaded / xhr.total * 100)}%`); }, (error) => { console.error(`Error loading model from ${path}:`, error); if (isMounted) tryLoadModel(pathIndex + 1); });
     };
@@ -111,12 +154,12 @@ const Hero: React.FC = () => {
     // --- End GLTF Loading ---
 
     // --- Lights Setup ---
-    const pointLight1 = new THREE.PointLight(0xffffff, 0.5, 100); pointLight1.position.set(5, 5, 5); pointLight1.castShadow = true; pointLight1.shadow.mapSize.width = 1024; pointLight1.shadow.mapSize.height = 1024; pointLight1.shadow.bias = -0.001; scene.add(pointLight1);
-    const pointLight3 = new THREE.PointLight(0xffffff, 4, 100); pointLight3.position.set(0, 5, -5); pointLight3.castShadow = true; pointLight3.shadow.mapSize.width = 1024; pointLight3.shadow.mapSize.height = 1024; pointLight3.shadow.bias = -0.001; scene.add(pointLight3);
-    const topLeftLight = new THREE.PointLight(0xffffff, 1.5, 100); topLeftLight.position.set(-5, 8, 0); topLeftLight.castShadow = true; topLeftLight.shadow.mapSize.width = 1024; topLeftLight.shadow.mapSize.height = 1024; topLeftLight.shadow.bias = -0.001; scene.add(topLeftLight);
-    const blueAccent = new THREE.PointLight(0x4a6bff, 0.8, 50); blueAccent.position.set(3, 2, 3); scene.add(blueAccent);
-    const pinkAccent = new THREE.PointLight(0xff5ea2, 0.8, 50); pinkAccent.position.set(-3, -2, 3); scene.add(pinkAccent);
-    const cyanAccent = new THREE.PointLight(0x38eeff, 0.8, 50); cyanAccent.position.set(0, -3, 2); scene.add(cyanAccent);
+    const pointLight1 = new THREE.PointLight(0xffffff, 0, 100); pointLight1.position.set(5, 5, 5); pointLight1.castShadow = true; pointLight1.shadow.mapSize.width = 1024; pointLight1.shadow.mapSize.height = 1024; pointLight1.shadow.bias = -0.001; scene.add(pointLight1);
+    const pointLight3 = new THREE.PointLight(0xffffff, 0, 100); pointLight3.position.set(0, 5, -5); pointLight3.castShadow = true; pointLight3.shadow.mapSize.width = 1024; pointLight3.shadow.mapSize.height = 1024; pointLight3.shadow.bias = -0.001; scene.add(pointLight3);
+    const topLeftLight = new THREE.PointLight(0xffffff, 0, 100); topLeftLight.position.set(-5, 8, 0); topLeftLight.castShadow = true; topLeftLight.shadow.mapSize.width = 1024; topLeftLight.shadow.mapSize.height = 1024; topLeftLight.shadow.bias = -0.001; scene.add(topLeftLight);
+    //const blueAccent = new THREE.PointLight(0x4a6bff, 0.8, 50); blueAccent.position.set(3, 2, 3); scene.add(blueAccent);
+    //const pinkAccent = new THREE.PointLight(0xff5ea2, 0.8, 50); pinkAccent.position.set(-3, -2, 3); scene.add(pinkAccent);
+   // const cyanAccent = new THREE.PointLight(0x38eeff, 0.8, 50); cyanAccent.position.set(0, -3, 2); scene.add(cyanAccent);
     const purpleAccent = new THREE.PointLight(0x8a2be2, 0.8, 50); purpleAccent.position.set(-2, 3, -2); scene.add(purpleAccent);
     const topGreenAccent = new THREE.PointLight(0x00ff7f, 0.5, 30); topGreenAccent.position.set(2, 6, 1); scene.add(topGreenAccent);
     const topYellowAccent = new THREE.PointLight(0xffd700, 0.5, 30); topYellowAccent.position.set(-2, 7, 0); scene.add(topYellowAccent);
@@ -126,9 +169,9 @@ const Hero: React.FC = () => {
     const frontTopPinkAccent = new THREE.PointLight(0xff69b4, 0.4, 25); frontTopPinkAccent.position.set(0, 5, 2); scene.add(frontTopPinkAccent);
 
     // Add blue spotlight
-    const blueSpotlight = new THREE.SpotLight(0x4a6bff, 2, 30, Math.PI / 6, 0.5, 1);
-    blueSpotlight.position.set(0, 5, 8);
-    blueSpotlight.target.position.set(0, 2.5, 0);
+    const blueSpotlight = new THREE.SpotLight(0x4a6bff, 5, 100, Math.PI / 6, 0.5, 1);
+    blueSpotlight.position.set(0, 6, 7);
+    blueSpotlight.target.position.set(0, 3, 0);
     scene.add(blueSpotlight);
     scene.add(blueSpotlight.target);
 
@@ -218,11 +261,11 @@ const Hero: React.FC = () => {
 
       // Cleanup Three.js resources
       scene.remove(discoBallGroup);
-      if (gltfSceneRef.current) {
-        gltfSceneRef.current.traverse((child: any) => {
-          if (child.isMesh) {
-            child.geometry?.dispose();
-            if (child.material) {
+       if (gltfSceneRef.current) {
+           gltfSceneRef.current.traverse((child: any) => {
+               if (child.isMesh) {
+                   child.geometry?.dispose();
+                   if (child.material) {
               if (Array.isArray(child.material)) {
                 child.material.forEach(mat => {
                   Object.values(mat).forEach((value: any) => {
@@ -236,10 +279,10 @@ const Hero: React.FC = () => {
                 });
                 child.material.dispose();
               }
-            }
-          }
-        });
-      }
+                   }
+               }
+           });
+       }
       renderer.dispose();
       console.log("Three.js cleanup complete.");
     };
@@ -247,7 +290,7 @@ const Hero: React.FC = () => {
 
   // --- JSX Return ---
   return (
-    <section className="relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center justify-center">
+    <section className="relative overflow-hidden min-h-[calc(100vh-8rem)] flex items-center justify-center pb-8 pt-16">
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
@@ -275,14 +318,16 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="container-custom relative z-30 pt-0 pb-16 text-center">
+      <div className="container-custom relative z-30 pt-8 pb-16 text-center">
          <div className="max-w-4xl mx-auto">
-           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-3 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500"> Turn interactions into income </h1>
+           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-3 text-[#D4A5FF] drop-shadow-[0_0_15px_rgba(178,75,243,0.5)] [text-shadow:_0_0_20px_rgba(178,75,243,0.7)]">
+             Turn interactions into
+             <TypeWriter />
+           </h1>
            <h2 className="text-2xl md:text-3xl font-semibold mb-4 text-gray-200"> Unify. Amplify. Grow. </h2>
            <p className="text-xl md:text-2xl mb-8 max-w-2xl mx-auto text-gray-300"> AI-powered growth for pros—ditch the SaaS sprawl. </p>
            <div className="flex flex-col sm:flex-row gap-4 justify-center">
              <button onClick={() => setShowModal(true)} className="btn-primary bg-gradient-to-r from-indigo-500 via-pink-500 hover:from-indigo-600 hover:via-purple-600"> Book Your Demo </button>
-             <a href="#use-cases" className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-gray-200 bg-gray-800/70 backdrop-blur-md border border-gray-700 rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all duration-300"> Explore Use Cases </a>
            </div>
          </div>
       </div>
@@ -292,6 +337,22 @@ const Hero: React.FC = () => {
         /* Modal fade in animation */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fadeIn { animation: fadeIn 0.3s ease-out forwards; }
+
+        /* Typewriter cursor effect */
+        .typewriter-cursor {
+          display: inline-block;
+          width: 2px;
+          height: 1em;
+          background-color: #FF6AD5;
+          margin-left: 4px;
+          animation: blink 0.7s infinite;
+          vertical-align: middle;
+        }
+        
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
 
         /* Accessibility: Improve focus visibility */
         *:focus-visible { outline: 3px solid #6366F1; outline-offset: 2px; }
