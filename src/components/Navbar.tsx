@@ -191,13 +191,12 @@ const Navbar = () => {
               </a>
             </li>
             <li>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-4 py-1.5 text-sm font-medium text-white bg-gradient-to-r from-[#D4A5FF] via-[#B24BF3] to-[#8A2BE2] hover:from-[#D4A5FF] hover:via-[#B24BF3] hover:to-[#8A2BE2] rounded-full shadow-lg shadow-[#B24BF3]/20 transition-all duration-300 hover:shadow-[#B24BF3]/30 hover:scale-105 hover:brightness-110"
+              <button 
+                onClick={() => setShowModal(true)}
+                className="px-4 py-1.5 text-sm font-medium text-white bg-gradient-to-r from-indigo-500 via-pink-500 to-purple-500 hover:from-indigo-600 hover:via-pink-600 hover:to-purple-600 rounded-full shadow-lg shadow-purple-500/20 transition-all duration-300 hover:shadow-purple-500/30 hover:scale-105 hover:brightness-110"
               >
                 Contact
-              </motion.button>
+              </button>
             </li>
           </ul>
         </motion.div>
