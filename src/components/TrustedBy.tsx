@@ -2,10 +2,10 @@ import React from 'react';
 
 const TrustedBy: React.FC = () => {
   return (
-    <section className="py-16 bg-gray-900/50">
+    <section className="py-24 bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950">
       <div className="container-custom">
         <div className="text-center mb-10 fade-in">
-          <h2 className="text-2xl font-bold text-gray-100">Trusted By Industry Leaders</h2>
+          <h2 className="text-2xl font-bold">Trusted By Industry Leaders</h2>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-8 items-center justify-items-center fade-in">
